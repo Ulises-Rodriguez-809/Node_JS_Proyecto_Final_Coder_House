@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import {options} from './config.js'
 
+// const MONGO = process.env.MONGO_URL || "mongodb+srv://usersDB:1234@cluster0.ugjlygz.mongodb.net/ecommerce";
 const MONGO = options.MONGO_URL;
 
 export const connectDB = async ()=>{

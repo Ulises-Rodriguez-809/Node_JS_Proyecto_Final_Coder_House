@@ -33,7 +33,8 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { addLogger } from './loggers/loggers.js';
 import loggerTestRouter from './routes/loggerTestRoutes.js';
 
-const PORT = options.PORT;
+// const PORT = process.env.PORT || 8080; --> esto despues ponelo ya q en render vas a cargar las variables de entorno
+const PORT = options.PORT || 8080;
 
 const app = express();
 
