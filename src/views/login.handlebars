@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="loginContainer">
+        <div class="login">
+            <h1 class="loginTitle">Login</h1>
+            <form id="loginForm">
+                <div class="emailContainer">
+                    <label>Email</label>
+                    <input name="email"><br>
+                </div>
+                <div class="contraseñaContainer">
+                    <label>Contraseña</label>
+                    <input name="password" type="password" autocomplete="on">
+                </div>
+                <div class="loginBtnContainer">
+                    <input type="submit">
+                </div>
+            </form>
+            <p>Si no estas registrado? <a href="/register">Registrate aqui</a></p>
+            <p>Si no estas registrado? <a href="/api/sessions/github">Entra con tu cuenta de GitHub</a></p>
+            <p>Olvidaste tu contraseña? <a href="/recoverPassword">Recuperar Contraseña</a></p>
+        </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+</body>
+
+</html>

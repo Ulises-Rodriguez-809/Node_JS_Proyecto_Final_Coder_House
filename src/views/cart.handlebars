@@ -1,0 +1,39 @@
+<header>
+    <nav>
+        <div>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/realtimeproducts">Real Time Products</a></li>
+                <li><a href="/api/sessions/current">Informacion del usuario</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div>
+        <h1>Cart list of products</h1>
+        {{!-- ACA AGREGA LA INFO DEL TICKET DE COMPRA PARA Q SE PUEDA VER EN CASO DE ERROR EN EL ENVIADO DEL MAILl --}}
+        <div>
+            <h2>Ticket de compra informacion:</h2>
+        </div>
+        <div>
+            <h3>Productos comprados:</h3>
+            <ul>
+                {{#each products}}
+                <li>
+                    id : {{this._id}}<br>
+                    cantidad comprada : {{this.quantity}}<br>
+                    titulo : {{this.title}}<br>
+                    descripcion : {{this.description}}<br>
+                    codigo : {{this.code}}<br>
+                    precio : {{this.price}}<br>
+                    status : {{this.status}}<br>
+                    categoria : {{this.category}}<br>
+                    miniaturas : {{this.thumbnails}}<br>
+                </li><br>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</main>

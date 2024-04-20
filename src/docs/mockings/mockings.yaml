@@ -1,0 +1,13 @@
+paths:
+  /mockingproducts/:
+    get:
+      summary: retorna productos generados al azar por mocking 
+      tags:
+        - Mocking
+      responses:
+        "200":
+          description: se renderizo con exito la vista mockingsPorudcts
+        "400":
+          description: No se logro renderizar obtener la vista mockingsPorudcts
+        "500":
+          description: error en el server

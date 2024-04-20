@@ -1,0 +1,157 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.productsContainer{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.products{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.subTitle{
+    text-align: center;
+}
+
+.opcionesContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.opcionLink{
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 1rem;
+}
+
+.formsContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: rgb(197, 197, 197);
+    border-radius: 10px;
+    border: solid 2px #000;
+}
+
+.formInfoContainer{
+    margin: 10px 0;
+    padding: 5px;
+    background-color: rgb(127, 255, 144);
+    border: #000 solid 2px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-areas: 
+    "idContainer idContainer idContainer"
+    "titleContainer titleContainer titleContainer"
+    "descriptionContainer descriptionContainer descriptionContainer"
+    "codeContainer statusContainer categoryContainer"
+    ". priceContainer ."
+    ". thumbnailsContainer ."
+    "countContainer countContainer countContainer"
+    "btnCompraContainer . ."
+    ;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2px;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.info>input{
+    text-align: center;
+}
+
+.idContainer{
+    grid-area: idContainer;
+    
+}
+
+.idContainer>input{
+    width: 70%;
+}
+
+.titleContainer{
+    grid-area: titleContainer;
+}
+
+.titleContainer>input{
+    width: 50%;
+}
+
+.descriptionContainer{
+    grid-area: descriptionContainer;
+}
+
+.descriptionContainer>input{
+    width: 50%;
+}
+
+.codeContainer{
+    grid-area: codeContainer;
+}
+
+.priceContainer{
+    grid-area: priceContainer;
+}
+
+.statusContainer{
+    grid-area: statusContainer;
+}
+
+.categoryContainer{
+    grid-area: categoryContainer;
+}
+
+.thumbnailsContainer{
+    grid-area: thumbnailsContainer;
+}
+
+.countContainer{
+    grid-area: countContainer;
+    margin: 1rem 0;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.plus,
+.count,
+.minus{
+    font-size: 2rem;
+    width: 40px;
+    height: 50px;
+    text-align: center;
+}
+
+.btnCompraContainer{
+    grid-area: btnCompraContainer;
+}
+
+.btnCompraContainer>input{
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.paginationContainer{
+    margin: 20px;
+}
+
+.paginationContainer>a, .paginationContainer>span{
+    font-size: 20px;
+}

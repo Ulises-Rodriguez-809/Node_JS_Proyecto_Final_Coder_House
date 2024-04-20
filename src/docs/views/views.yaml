@@ -1,0 +1,92 @@
+paths:
+  /:
+    get:
+      summary: vista para completar el formulario de login
+      tags:
+        - Views
+      responses:
+        "200":
+          description: renderiza la vista login
+        "400":
+          description: No se logro renderizar obtener la vista login
+        "500":
+          description: error en el server
+  /register:
+    get:
+      summary: vista para completar el formulario de registro
+      tags:
+        - Views
+      responses:
+        "200":
+          description: renderiza la vista register
+        "400":
+          description: No se logro renderizar obtener la vista register
+        "500":
+          description: error en el server
+  /recoverPassword:
+    get:
+      summary: vista para recuperar tu contraseña
+      tags:
+        - Views
+      responses:
+        "200":
+          description: renderiza la vista para recuperar la contraseña
+        "400":
+          description: No se logro renderizar obtener la vista de recuperar contrasaeña
+        "500":
+          description: error en el server
+  /resetPassword:
+    get:
+      summary: vista para resetear tu contraseña
+      tags:
+        - Views
+      responses:
+        "200":
+          description: renderiza la vista para actualizar la contraseña (solo por link de email)
+        "400":
+          description: No se logro renderizar obtener la vista resetPassword
+        "500":
+          description: error en el server
+  /products:
+    get:
+      summary: vista de productos disponibles para comprar
+      tags:
+        - Views
+      responses:
+        "200":
+          description: renderiza la vista productos, que muestra los productos disponibles para comprar, ademas de opciones para realizar compra, salir y obtener el rol premium
+        "400":
+          description: No se logro
+        "500":
+          description: error en el server
+  /carts/{cartId}:
+    get:
+      summary: vista donde el usuario puede ver info de su cart
+      tags:
+        - Views
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          description: cartId es el id del cart
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: renderiza la vista que muestra la lista de productos del cart
+        "400":
+          description: No se logro renderizar la vista que muestra los productos del cart
+        "500":
+          description: error en el server
+  /realtimeproducts:
+    get:
+      summary: vista donde el usuario "admin" o "premium" pueden añadir/eliminar/actualizar productos
+      tags:
+        - Views
+      responses:
+        "200":
+          description: renderiza la vista realtiemProducts
+        "400":
+          description: No se logro renderizar la vista realtimeProducts
+        "500":
+          description: error en el server

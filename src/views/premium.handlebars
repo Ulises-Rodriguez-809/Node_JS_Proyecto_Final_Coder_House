@@ -1,0 +1,37 @@
+<header>
+    <nav>
+        <div>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/realtimeproducts">Real Time Products</a></li>
+                <li><a href="/api/sessions/current">Informacion del usuario</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <h1>Obtener premium</h1>
+    <p>Para obtener el rol premium complete el siguiente formulario</p>
+    <p>Instrucciones:</p>
+    <p>Ingresa tu ID de usuario que se te proporciono en el mail de confirmacion de registro</p>
+    <p>Seleccionar documentos el cual debe de ser una imagen de identificacion, comprobante de domicilio, comprobante de
+        estado de cuenta</p>
+    <div>
+        <form name="obtener-premium" id="form-premium" enctype="multipart/form-data">
+            <div class="idContainer info">
+                <label>Ingresa tu ID de usuario:</label>
+                <input type="text" name="id-user" id="id-user">
+            </div>
+            <div>
+                <label for="input-documents">Seleccionar documentos:</label><br>
+                <input type="file" name="documents" id="input-documents" multiple="multiple" required>
+            </div>
+            <div>
+                <input type="submit">Obtener premium</input>
+            </div>
+        </form>
+    </div>
+    </form>
+</main>
+<script src="/js/premium.js"></script>

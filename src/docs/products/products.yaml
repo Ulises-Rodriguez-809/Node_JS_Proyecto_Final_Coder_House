@@ -1,0 +1,371 @@
+paths:
+  /api/productsDB/:
+    get:
+      summary: Obtener todos los productos
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Se logro con exito obtener todos los productos de la DB
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          description: No se logro obtener los productos de la DB
+        "500":
+          description: Error interno del servidor
+    post:
+      summary: Añadir un nuevo producto a la DB, solo si se tiene rol "admin" o "premium"
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/body/CreateProduct"
+      responses:
+        "200":
+          description: Se logró añadir un nuevo producto a la DB con éxito
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: "success"
+                  payload:
+                    _id: ObjectId('ahjg7862jahsgd871263')
+                    title: arroz
+                    description: bolsa de arroz de 1KG
+                    price: 1200
+                    code: 1fgs56d1
+                    stock: 123
+                    category: comida
+                    status: ok
+                    thumbnails: [arrozImg1, arrozImg2]
+                    owner: "admin"
+        "400":
+          description: No se tienen los permisos necesarios para añadir productos
+        "500":
+          description: Error interno del servidor
+  /api/productsDB/{productId}:
+    get:
+      summary: Obtener un producto por su id
+      tags:
+        - Products
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: productId es el id del producto
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: Se logro obtener con exito el producto con el "productId" pasado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/getById/GetProductById"
+        "400":
+          description: No se logro obtener el producto con el "productId"
+        "500":
+          description: Error interno del servidor
+    put:
+      summary: modifica un producto por su productId 
+      tags:
+        - Products
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: productId es el id del producto
+          schema:
+            $type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/body/UpdateProduct"
+      responses:
+        "200":
+          description: Se logro modificar con exito el producto con el "productId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/updateById/UpdateProductById"
+        "400":
+          description: No se logro modificar el producto con el "productId"
+        "500":
+          description: Error interno del servidor
+    delete:
+      summary: Eliminar de la DB un producto por su id
+      tags:
+        - Products
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: productId es el id del producto
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: Se logro eliminar con exito el producto con el "productId" pasado
+        "400":
+          description: No se logro eliminar el producto con el "productId"
+        "500":
+          description: Error interno del servidor
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: id del producto autogenerado por la DB
+        title:
+          type: string
+          description: nombre del producto
+        descripcion:
+          type: string
+          description: descripcion del producto
+        price:
+          type: number
+          description: precio del producto
+        code:
+          type: string
+          description: codigo del producto
+        stock:
+          type: number
+          description: cantidad del producto
+        category:
+          type: string
+          description: categoria del producto
+        status:
+          type: string
+          description: estado del producto
+        thumbnails:
+          type: array
+          description: imagenes del producto
+        owner:
+          type: string
+          description: creador del producto
+      example:
+        - _id: ObjectId('ahjg7862jahsgd871263')
+          title: arroz
+          description: bolsa de arroz de 1KG
+          price: 1200
+          code: 1fgs56d1
+          stock: 123
+          category: comida
+          status: ok
+          thumbnails: [arrozImg1, arrozImg2]
+          owner: "admin"
+        - _id: ObjectId('aas5dg416dsf5g463')
+          title: masitas
+          description: pquete de masitas
+          price: 500
+          code: 1av68csd
+          stock: 15
+          category: comida
+          status: ok
+          thumbnails: []
+          owner: "emailDeUsuarioPremium"
+  getById:
+    GetProductById:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: id del producto autogenerado por la DB
+        title:
+          type: string
+          description: nombre del producto
+        descripcion:
+          type: string
+          description: descripcion del producto
+        price:
+          type: number
+          description: precio del producto
+        code:
+          type: string
+          description: codigo del producto
+        stock:
+          type: number
+          description: cantidad del producto
+        category:
+          type: string
+          description: categoria del producto
+        status:
+          type: string
+          description: estado del producto
+        thumbnails:
+          type: array
+          description: imagenes del producto
+        owner:
+          type: string
+          description: creador del producto
+      example:
+        status : "success"
+        payload:
+          _id: ObjectId('ahjg7862jahsgd871263')
+          title: arroz
+          description: bolsa de arroz de 1KG
+          price: 1200
+          code: 1fgs56d1
+          stock: 123
+          category: comida
+          status: ok
+          thumbnails: [arrozImg1, arrozImg2]
+          owner: "admin"
+  updateById:
+    UpdateProductById:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: id del producto autogenerado por la DB
+        title:
+          type: string
+          description: nombre del producto
+        descripcion:
+          type: string
+          description: descripcion del producto
+        price:
+          type: number
+          description: precio del producto
+        code:
+          type: string
+          description: codigo del producto
+        stock:
+          type: number
+          description: cantidad del producto
+        category:
+          type: string
+          description: categoria del producto
+        status:
+          type: string
+          description: estado del producto
+        thumbnails:
+          type: array
+          description: imagenes del producto
+        owner:
+          type: string
+          description: creador del producto
+      example:
+        status : "success"
+        payload:
+          _id: ObjectId('ahjg7862jahsgd871263')
+          title: Nuevo Nombre
+          description: Nueva descripcion
+          price: 1000
+          code: 1fgs56d1
+          stock: 13
+          category: comida
+          status: ok
+          thumbnails: [arrozImg1, arrozImg2]
+          owner: "admin"
+  body:
+    CreateProduct:
+      type: object
+      properties:
+        status: 
+          type: string
+          description: estado de la peticion
+        payload:
+          type: object
+          description: Producto creado o mensaje de error
+          properties:
+            _id:
+              type: string
+              description: id del producto autogenerado por la DB
+            title:
+              type: string
+              description: nombre del producto
+            descripcion:
+              type: string
+              description: descripcion del producto
+            price:
+              type: number
+              description: precio del producto
+            code:
+              type: string
+              description: codigo del producto
+            stock:
+              type: number
+              description: cantidad del producto
+            category:
+              type: string
+              description: categoria del producto
+            status:
+              type: string
+              description: estado del producto
+            thumbnails:
+              type: array
+              description: imagenes del producto
+            owner:
+              type: string
+              description: creador del producto
+      example:
+        title: arroz
+        description: bolsa de arroz de 1KG
+        price: 1200
+        code: 1fgs56d1
+        stock: 123
+        category: comida
+        status: ok
+        thumbnails: [arrozImg1, arrozImg2]
+        owner: "admin"
+    UpdateProduct:
+      type: object
+      properties:
+        status: 
+          type: string
+          description: estado de la peticion
+        payload:
+          type: object
+          description: Producto creado o mensaje de error
+          properties:
+            _id:
+              type: string
+              description: id del producto autogenerado por la DB
+            title:
+              type: string
+              description: nombre del producto
+            descripcion:
+              type: string
+              description: descripcion del producto
+            price:
+              type: number
+              description: precio del producto
+            code:
+              type: string
+              description: codigo del producto
+            stock:
+              type: number
+              description: cantidad del producto
+            category:
+              type: string
+              description: categoria del producto
+            status:
+              type: string
+              description: estado del producto
+            thumbnails:
+              type: array
+              description: imagenes del producto
+            owner:
+              type: string
+              description: creador del producto
+      example:
+        title: Nuevo Nombre
+        description: Nueva descripcion
+        price: 1000
+        code: 1fgs56d1
+        stock: 13
+        category: comida
+        status: ok
+        thumbnails: [arrozImg1, arrozImg2]
+        owner: "admin"

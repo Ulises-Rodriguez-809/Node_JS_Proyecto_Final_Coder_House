@@ -1,0 +1,7 @@
+export const ERRORS = {
+    PRODUCT_ERROR : 1,
+    CART_ERROR : 2,
+    PRODUCT_TO_CART_ERROR : 3,
+    TICKET_ERROR : 4,
+    EMAIL_SEND_ERROR : 5
+}

@@ -1,0 +1,108 @@
+<header>
+    <nav>
+        <div>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href={{user.cartUrl}}>Cart</a></li>
+                <li><a href="/realtimeproducts">Real Time Products</a></li>
+                <li><a href="/api/sessions/current">Informacion del usuario</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+        <div class="productsContainer">
+        <div>
+            <h1>Bienvenido <span id="userName">{{user.full_name}}</span></h1>
+            <p>Estos son tus Datos:</p>
+            <ul>
+                <li>tu edad es : {{user.age}}</li>
+                <li>tu email es : {{user.email}}</li>
+                <li>tu rol es : <span id="userRol">{{user.rol}}</span></li>
+                <li>
+                    <p>cart id :</p>
+                    <p id="id-cart">{{user.cartID}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="opcionesContainer">
+            <div>
+                <button class="finalizarCompra opcionLink">Realizar Compra</button>
+            </div>
+            <div id="containerChangeRol">
+            </div>
+            <div>
+                <a href="/api/sessions/logout"><button class="opcionLink">Salir</button></a>
+            </div>
+        </div>
+        <div class="products">
+            <div>
+                <h2 class="subTitle">Productos:</h2>
+            </div>
+
+            <div class="formsContainer">
+                {{#each products.docs}}
+                <form class="form">
+                    <div class="formInfoContainer">
+                        <div class="idContainer info">
+                            <label>id productos:</label>
+                            <input type="text" value={{this.id}} name="id" readonly>
+                        </div>
+                        <div class="titleContainer info">
+                            <label>Titulo:</label>
+                            <input class="title" type="text" value={{this.title}} name="title" readonly>
+                        </div>
+                        <div class="descriptionContainer info">
+                            <label>Descripcion:</label>
+                            <input type="text" value={{this.description}} name="description" readonly>
+                        </div>
+                        <div class="codeContainer info">
+                            <label>Codigo:</label>
+                            <input type="text" value={{this.code}} name="code" readonly>
+                        </div>
+                        <div class="priceContainer info">
+                            <label>Precio:</label>
+                            <input type="text" value={{this.price}} name="price" readonly>
+                        </div>
+                        <div class="statusContainer info">
+                            <label>Status:</label>
+                            <input type="text" value={{this.status}} name="status" readonly>
+                        </div>
+                        <div class="categoryContainer info">
+                            <label>Categoria:</label>
+                            <input type="text" value={{this.category}} name="category" readonly>
+                        </div>
+                        <div class="thumbnailsContainer info">
+                            <label>Miniaturas:</label>
+                            <input type="text" value={{this.thumbnails}} name="thumbnails" readonly>
+                        </div>
+                        <div class="countContainer info">
+                            <button type="button" class="plus">+</button>
+                            <input class="count" type="text" value="0" name="quantity">
+                            {{!-- <span class="count">0</span> --}}
+                            <button type="button" class="minus">-</button>
+                        </div>
+                        <div class="btnCompraContainer info">
+                            <input type="submit" value="Comprar">
+                        </div>
+                    </div>
+                </form>
+                {{/each}}
+            </div>
+
+            <div class="paginationContainer">
+                {{#if products.hasPrevPage}}
+                <a href="/products?limit={{products.limit}}&page={{products.prevPage}}">Anterior</a>
+                {{/if}}
+                <span>Pagina {{products.page}} de {{products.totalPages}}</span>
+                {{#if products.hasNextPage}}
+                <a href="/products?limit={{products.limit}}&page={{products.nextPage}}">Siguiente</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    <script src="/js/products.js"></script>
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
+    <link rel="stylesheet" href="/css/products.css">
+</main>
+

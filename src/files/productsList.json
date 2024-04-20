@@ -1,0 +1,95 @@
+[
+	{
+		"title": "cafee",
+		"description": "cafesitoooo rico",
+		"code": "ds45f64ds5f",
+		"price": "2000",
+		"status": "todo tranki",
+		"stock": "162",
+		"category": "bebida",
+		"thumbnails": [
+			"url1",
+			"url2"
+		],
+		"id": 0
+	},
+	{
+		"title": "masitas",
+		"description": "masitas rico",
+		"code": "1235",
+		"price": "123",
+		"status": "todo bien",
+		"stock": "123",
+		"category": "comida",
+		"thumbnails": [
+			"url1",
+			"url2"
+		],
+		"id": 1
+	},
+	{
+		"price": "100",
+		"description": "torta rico",
+		"code": "a5ds4f65s6",
+		"title": "torta",
+		"stock": "2",
+		"category": "comida",
+		"thumbnails": [],
+		"status": true,
+		"id": 2
+	},
+	{
+		"title": "helado",
+		"description": "helado de grido",
+		"code": "1da8s7f",
+		"price": "1200",
+		"stock": "23",
+		"category": "comida",
+		"thumbnails": [
+			"url1",
+			"url2",
+			"url3"
+		],
+		"status": true,
+		"id": 3
+	},
+	{
+		"title": "alfajor",
+		"description": "alfajor tatin",
+		"code": "ds45f64ds5f",
+		"price": "30",
+		"stock": "6",
+		"category": "comida",
+		"thumbnails": [
+			"url1dsfdsfdsfdsf",
+			"urlgfhfghfghf2"
+		],
+		"status": "dale pibe",
+		"id": 4
+	},
+	{
+		"title": "vino",
+		"description": "alto vino pa",
+		"code": "ju4fn65df1sh86d",
+		"price": "4000",
+		"status": true,
+		"stock": "14",
+		"category": "bebida",
+		"thumbnails": [
+			"urlVinito1",
+			"urlVinito2"
+		],
+		"id": 5
+	},
+	{
+		"title": "productoNuevo",
+		"description": "nuevo producto",
+		"code": "12l3k21l3k12j3ughgjghjbvcbc",
+		"price": "123",
+		"stock": "6",
+		"category": "cosas nuevas",
+		"thumbnails": "url1,url2",
+		"status": true,
+		"id": 8
+	}
+]

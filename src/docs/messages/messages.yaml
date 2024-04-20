@@ -1,0 +1,13 @@
+paths:
+  /api/messages/:
+    get:
+      summary: Vista de mensajes en tiempo real
+      tags:
+        - Messages
+      responses:
+        "200":
+          description: renderiza la vista message con exito
+        "400":
+          description: No se logro renderizar obtener la vista message
+        "500":
+          description: error en el server

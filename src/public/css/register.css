@@ -1,0 +1,48 @@
+.registerContainer{
+    height: 750px;
+    background-color: rgb(219, 218, 218);
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register{
+    height: 500px;
+    width: 70%;
+    background-color: rgb(120, 192, 252);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.registerTitle{
+    font-size: 2rem;
+}
+
+.registerForm{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    font-size: 20px;
+}
+
+.registerBtnContainer{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerBtnContainer>input{
+    font-size: 20px;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+}

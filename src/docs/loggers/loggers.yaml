@@ -1,0 +1,9 @@
+paths:
+  /loggerTest:
+    get:
+      summary: probar todos los loggers test
+      tags:
+        - Loggers
+      responses:
+        "200":
+          description: Impreme por terminal un ejemplo de cada logger

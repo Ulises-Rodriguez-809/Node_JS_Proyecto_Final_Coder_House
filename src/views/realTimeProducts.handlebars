@@ -1,0 +1,113 @@
+<header>
+    <nav>
+        <div>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href={{user.cartUrl}}>Cart</a></li>
+                <li><a href="/api/sessions/current">Informacion del usuario</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <h1>Realtime Products</h1>
+    <div>
+        <h2>Agregar nuevo producto</h2>
+        <form name="nuevo-producto" id="nuevo-producto" enctype="multipart/form-data">
+            <div>
+                <label for="input-title-add">Titulo</label>
+                <input type="text" name="title" id="input-title-add" placeholder="Nombre del producto" required>
+            </div>
+            <div>
+                <label for="input-description-add">Descripcion</label>
+                <input type="text" name="description" id="input-description-add" placeholder="Descripcion del producto"
+                    required>
+            </div>
+            <div>
+                <label for="input-code-add">Code</label>
+                <input type="text" name="code" id="input-code-add" placeholder="Code del producto" required>
+            </div>
+            <div>
+                <label for="input-price-add">Precio</label>
+                <input type="number" name="price" id="input-price-add" placeholder="Precio del producto" min="1"
+                    required>
+            </div>
+            <div>
+                <label for="input-stock-add">Stock</label>
+                <input type="number" name="stock" id="input-stock-add" placeholder="Stock del producto" min="1"
+                    required>
+            </div>
+            <div>
+                <label for="input-category-add">Categoria</label>
+                <input type="text" name="category" id="input-category-add" placeholder="Categoria del producto"
+                    required>
+            </div>
+            <div>
+                <label for="input-thumbnails">Seleccionar fotos:</label><br>
+                <input type="file" name="thumbnails" id="input-thumbnails" multiple="multiple" required>
+            </div>
+            <div>
+                <label for="input-owner-add">Owner</label>
+                <input type="text" name="owner" id="input-owner-add" value={{user.owner}}>
+            </div>
+            <div>
+                <input type="submit">Añadir</input>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h2>Eliminar Producto</h2>
+        <label for="input-id-eliminar">Eliminar Producto</label>
+        <input type="text" name="eliminarProducto" id="input-id-eliminar" placeholder="Ingrese el id del producto"
+            min="0" required>
+        <input type="submit" id="btn-eliminar" value="Eliminar"></input>
+
+    </div>
+    <div>
+        <h2>Actualizar producto</h2>
+        <form name="actualizar-producto" id="actualizar-producto" enctype="multipart/form-data">
+            <div>
+                <label for="input-id-update">Id producto</label>
+                <input type="text" name="id" id="input-id-update" placeholder="id del producto" required>
+            </div>
+            <div>
+                <label for="input-title-update">Titulo</label>
+                <input type="text" name="title" id="input-title-update" placeholder="Nombre del producto" required>
+            </div>
+            <div>
+                <label for="input-description-update">Descripcion</label>
+                <input type="text" name="description" id="input-description-update"
+                    placeholder="Descripcion del producto" required>
+            </div>
+            <div>
+                <label for="input-code-update">Code</label>
+                <input type="text" name="code" id="input-code-update" placeholder="Code del producto" required>
+            </div>
+            <div>
+                <label for="input-price-update">Precio</label>
+                <input type="number" name="price" id="input-price-update" placeholder="Precio del producto" min="1"
+                    required>
+            </div>
+            <div>
+                <label for="input-stock-update">Stock</label>
+                <input type="number" name="stock" id="input-stock-update" placeholder="Stock del producto" min="1"
+                    required>
+            </div>
+            <div>
+                <label for="input-category-update">Categoria</label>
+                <input type="text" name="category" id="input-category-update" placeholder="Categoria del producto"
+                    required>
+            </div>
+            <div>
+                <label for="input-thumbnails">Seleccionar fotos:</label><br>
+                <input type="file" name="thumbnails" id="input-thumbnails" multiple="multiple" required>
+            </div>
+            <div>
+                <input type="submit">Actualizar</input>
+            </div>
+        </form>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/newProducts.js"></script>
