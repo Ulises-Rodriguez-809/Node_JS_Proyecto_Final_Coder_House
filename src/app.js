@@ -33,8 +33,14 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { addLogger } from './loggers/loggers.js';
 import loggerTestRouter from './routes/loggerTestRoutes.js';
 
+// URL DE RENDER Y RAILWAY
+// https://nodeproyectofinal-production.up.railway.app/
+// https://node-proyecto-final.onrender.com/products
+
+
 // const PORT = process.env.PORT || 8080; --> esto despues ponelo ya q en render vas a cargar las variables de entorno
-const PORT = options.PORT || 8080;
+// const PORT = options.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 
