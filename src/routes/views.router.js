@@ -29,6 +29,10 @@ router.get('/carts/:cartId', ViewsControllers.cartId);
 // DB router --> esto usalo para q el admin pueda agregar productos
 router.get('/realtimeproducts', checkRole(["premium", "admin"]), ViewsControllers.realtimeproducts);
 
+// vista para obtener el premium
 router.get('/preimum', checkRole(["user"]), ViewsControllers.premium);
+
+// vista para q el admin vea todos los usuarios y pueda eliminar los inactivos en los ultimos 2 dias
+router.get('/users', checkRole(["admin"]), ViewsControllers.usersInfo);
 
 export default router;

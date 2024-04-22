@@ -39,4 +39,11 @@ export class Users {
 
         return result;
     }
+
+    deleteUser = async(id)=>{
+
+        let resutl = await userModel.findByIdAndDelete(id);
+
+        return resutl;
+    }
 }

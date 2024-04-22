@@ -1,7 +1,7 @@
 <header>
     <nav>
         <div>
-            <ul>
+            <ul id="ul-home">
                 <li><a href="/products">Products</a></li>
                 <li><a href={{user.cartUrl}}>Cart</a></li>
                 <li><a href="/api/sessions/current">Informacion del usuario</a></li>
@@ -11,8 +11,9 @@
     </nav>
 </header>
 <main>
-    <h1>Bienvenido {{user.full_name}}</h1>
+    <h1>Bienvenido <span>{{user.full_name}}</span> tu rol actual es <span id="user-rol">{{user.rol}}</span></h1>
     <p>Esta es nuestra tienda donde podras encontrar una gran variedad de productos</p>
     <p></p>
     <p>Agrega css, algunas imagenes de productos</p>
 </main>
+<script src="/js/home.js"></script>

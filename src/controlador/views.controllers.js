@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { cartService, productService } from '../respository/index.repository.js';
+import { cartService, productService, userService } from '../respository/index.repository.js';
 
 class ViewsControllers {
     static login = (req, res) => {
@@ -63,12 +63,13 @@ class ViewsControllers {
 
             const decodedToken = jwt.decode(tokenInfo);
 
-            const {full_name, cartID } = decodedToken;
+            const { full_name, rol ,cartID } = decodedToken;
 
             const cartUrl = `/carts/${cartID}`;
 
             const user = {
                 full_name,
+                rol,
                 cartUrl
             }
 
@@ -219,6 +220,23 @@ class ViewsControllers {
             res.status(500).send({
                 status: "error",
                 message: "No se logro obtener la vista con el formulario para obtener el rol premium"
+            })
+        }
+    }
+
+
+    static usersInfo = async (req, res) => {
+        try {
+
+            const users = await userService.getAllNoSensitiveInformation();
+
+            res.render("users", { users });
+        } catch (error) {
+            req.logger.error("Error, al intentar obtener la vista usersInfo");
+
+            res.status(500).send({
+                status: "error",
+                message: "No se logro obtener la vista con la informacion de todos los usuarios"
             })
         }
     }

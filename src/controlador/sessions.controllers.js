@@ -7,7 +7,7 @@ import { sendRecoverPassword } from '../config/gmail.js';
 class SessionControler {
     static register = async (req, res) => {
         try {
-            const {id ,first_name, last_name, email } = req.user;
+            const { id, first_name, last_name, email } = req.user;
 
             const full_name = first_name.concat(" ", last_name);
 
@@ -107,13 +107,12 @@ class SessionControler {
                 })
             }
 
-            const userUpdated = await this.updateLastLogin(req, res);
-
             let user = {};
 
             const { first_name, last_name, age, email, password, cart, rol } = req.user;
 
             if (email === options.ADMIN_EMAIL && password === options.ADMIN_PASSWORD) {
+                console.log("admin");
                 user = {
                     full_name: `${first_name} ${last_name}`,
                     age,
@@ -134,6 +133,8 @@ class SessionControler {
                         payload: "datos incompletos"
                     })
                 }
+
+                const userUpdated = await this.updateLastLogin(req, res);
 
                 user = {
                     full_name: `${first_name} ${last_name}`,
@@ -302,8 +303,17 @@ class SessionControler {
 
     static logout = async (req, res) => {
         try {
-            // al igual q el update de last_login no te hace falta guardar el resultado del update pero como en el repository de user retornas algo, es para mantener la misma estrucura
-            const userUpdated = await this.updateLastLogout(req, res);
+
+            const tokenInfo = req.cookies["jwt-cookie"];
+
+            const decodedToken = jwt.decode(tokenInfo);
+
+            const { email } = decodedToken;
+
+            if (email !== options.ADMIN_EMAIL) {
+                // al igual q el update de last_login no te hace falta guardar el resultado del update pero como en el repository de user retornas algo, es para mantener la misma estrucura
+                const userUpdated = await this.updateLastLogout(req, res);
+            }
 
             if (req.cookies[options.COOKIE_WORD]) {
 

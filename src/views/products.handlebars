@@ -11,7 +11,7 @@
     </nav>
 </header>
 <main>
-        <div class="productsContainer">
+    <div class="productsContainer">
         <div>
             <h1>Bienvenido <span id="userName">{{user.full_name}}</span></h1>
             <p>Estos son tus Datos:</p>
@@ -79,7 +79,6 @@
                         <div class="countContainer info">
                             <button type="button" class="plus">+</button>
                             <input class="count" type="text" value="0" name="quantity">
-                            {{!-- <span class="count">0</span> --}}
                             <button type="button" class="minus">-</button>
                         </div>
                         <div class="btnCompraContainer info">
@@ -101,8 +100,9 @@
             </div>
         </div>
     </div>
-    <script src="/js/products.js"></script>
-    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
-    <link rel="stylesheet" href="/css/products.css">
-</main>
 
+</main>
+<script src="/js/products.js"></script>
+{{!--
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
+<link rel="stylesheet" href="/css/products.css">
