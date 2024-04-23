@@ -27,6 +27,34 @@ class UsersControllers {
         }
     }
 
+    static getUser = async(req,res)=>{
+        try {
+            const userInfo = {
+                email : req.params.userEmail
+            };
+            
+            const user = await userService.get(userInfo);
+
+            if (!user) {
+                return res.status(500).send({
+                    status : "error",
+                    payload : "usuario no encontrado"
+                })
+            }
+
+            res.send({
+                status : "success",
+                payload : user
+            })
+
+        } catch (error) {
+            res.status(500).send({
+                status: "error",
+                payload: "No se logro obtener el usuario"
+            })
+        }
+    }
+
     static premiumUser = async (req, res) => {
         try {
             // obtener el userId por el form de premium.handlebars es medio al pedo ya q antes ya podias obtener el rol del usuario pero como para la practica integradora piden q el enpoint sea /premium/:userId pues tenes q hacerlo de esta manera
@@ -112,6 +140,67 @@ class UsersControllers {
             res.status(500).send({
                 status: "error",
                 message: "No se logro cargar los documentos"
+            })
+        }
+    }
+
+    static adminChangeRolUser = async(req,res)=>{
+        try {
+            const {id,rol} = req.body;
+
+            const auxArray = ["admin","user","premium"];
+
+            if (!auxArray.includes(rol)) {
+                console.log("entro");
+                return res.status(500).send({
+                    status: "error",
+                    payload: "El rol asignado debe ser alguna de las opciones :  admin | user | premium"
+                })
+            }
+            
+            const usersRolUpdated = await userService.changeRol(id,rol);
+            
+            if (!usersRolUpdated) {
+                return res.status(500).send({
+                    status: "error",
+                    payload: "No se logro obtener los usuarios"
+                })
+            }
+
+            res.send({
+                status : "success",
+                payload : "El rol del usuario se modifico con exito"
+            })
+
+        } catch (error) {
+            res.status(500).send({
+                status: "error",
+                message: "No se logro cargar los documentos"
+            })
+        }
+    }
+
+    static deleteUser = async(req,res)=>{
+        try {
+            const id = req.params.userId;
+
+            const userDeleted = await userService.delete(id);
+
+            if (!userDeleted) {
+                return res.status(500).send({
+                    status: "error",
+                    message: `No se logro eliminar el usuario con el id : ${id}`
+                })
+            }
+
+            res.send({
+                status : "success",
+                payload : `Usuario con el id : ${id} eliminado con exito`
+            })
+        } catch (error) {
+            res.status(500).send({
+                status: "error",
+                message: "No se logro eliminar el usuario"
             })
         }
     }

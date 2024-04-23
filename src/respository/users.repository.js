@@ -49,6 +49,12 @@ export class UsersRepository {
         return result;
     }
 
+    async changeRol(id, rol) {
+        
+        const result = await this.dao.updateRol(id, rol);
+        return result;
+    }
+
     async delete(id) {
         const result = await this.dao.deleteUser(id);
 

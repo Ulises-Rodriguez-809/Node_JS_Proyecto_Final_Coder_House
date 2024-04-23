@@ -40,6 +40,17 @@ export class Users {
         return result;
     }
 
+    // esta es para usarla en la vista users cuando se loguea como admin ya q es solo para modificar el rol del usuario
+    updateRol = async(id,rol)=>{
+        let resutl = await userModel.findById(id);
+
+        resutl.rol = rol;
+
+        await resutl.save();
+
+        return resutl;
+    }
+
     deleteUser = async(id)=>{
 
         let resutl = await userModel.findByIdAndDelete(id);
