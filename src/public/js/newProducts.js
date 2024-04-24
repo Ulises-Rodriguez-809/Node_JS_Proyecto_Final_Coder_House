@@ -14,24 +14,10 @@ form.addEventListener("submit", e => {
 
     const data = new FormData(form);
 
-    // const obj = {}
-
-    // data.forEach((value, key) => obj[key] = value)
-
-    // obj.thumbnails = [...inputThumbnails.files];
-
-    // este fetch va asi xq sino multer trae undifined en el req.file
     fetch(`/api/productsDB`, {
         method: "POST",
         body: data,
     })
-    // fetch(`/api/productsDB`, {
-    //     method: "POST",
-    //     body: JSON.stringify(obj),
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     }
-    // })
         .then(result => result.json())
         .then(json => {
             console.log(json);
@@ -94,20 +80,20 @@ formUpdate.addEventListener("submit", e => {
         method: "PUT",
         body: data,
     })
-    // fetch(endpoint, {
-    //     method: "PUT",
-    //     body: JSON.stringify(obj),
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     }
-    // })
+        // fetch(endpoint, {
+        //     method: "PUT",
+        //     body: JSON.stringify(obj),
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     }
+        // })
         .then(result => result.json())
         .then(json => {
             console.log(json);
             if (json.status === "success") {
                 alert("Producto Actualizado");
             }
-            else{
+            else {
                 alert("No se logro actualizar el producto");
             }
         })

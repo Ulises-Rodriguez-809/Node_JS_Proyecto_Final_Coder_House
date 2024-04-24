@@ -3,6 +3,7 @@ import { productService } from '../respository/index.repository.js';
 import { CustomError } from '../services/customError.services.js';
 import productErrorOptions from '../services/productError.js';
 import jwt from 'jsonwebtoken';
+import { emailSender } from '../utils.js';
 
 class ProductsControllers {
     static getProductsPaginate = async (req, res, next) => {
@@ -136,7 +137,7 @@ class ProductsControllers {
             // [Object: null prototype] no te cambia nada se puede acceder a las props del producto igual pero queda raro verlo asi por eso el parse y stringify
             // ya q no lo estas volviendo string el fetch
             // https://stackoverflow.com/questions/56298481/how-to-fix-object-null-prototype-title-product
-            const fields =JSON.parse(JSON.stringify(req.body));
+            const fields = JSON.parse(JSON.stringify(req.body));
 
             if (!fields) {
                 req.logger.error("Campos incompletos");
@@ -183,7 +184,7 @@ class ProductsControllers {
             // const fields = req.body;
             const id = req.params.productId;
 
-            const fields =JSON.parse(JSON.stringify(req.body));
+            const fields = JSON.parse(JSON.stringify(req.body));
 
             if (!id || !fields) {
                 req.logger.warning(`Los campos necesarios para actualizar el producto estan vacios`);
@@ -223,11 +224,11 @@ class ProductsControllers {
         }
     }
 
+    // agrega el envio de mail cuando el admin o el usuario premiunm eliminan un producto del usuario premiumn
+    // solo al usuario del creador del product
     static deleteProduct = async (req, res, next) => {
         try {
             const id = req.params.productId;
-            let result = null;
-            let message = "";
 
             if (!id) {
                 req.logger.error(`El id del producto llego vacio`);
@@ -240,6 +241,13 @@ class ProductsControllers {
                 })
             }
 
+            let result = null;
+            let message = "";
+
+            const product = await productService.getById(id);
+
+            const { owner } = product;
+
             const tokenInfo = req.cookies["jwt-cookie"];
 
             const decodedToken = jwt.decode(tokenInfo);
@@ -248,35 +256,27 @@ class ProductsControllers {
             if (decodedToken.rol === "admin") {
                 result = await productService.deleteOne(id);
 
-                if (result) {
-                    message = `El admin logro eliminar con exito el producto con el id: ${id}`;
-
-                    return res.send({
-                        status: "success",
-                        message
+                if (!result) {
+                    message = `El admin NO logro eliminar el producto con el id: ${id}`;
+                    
+                    return res.status(400).send({
+                        status: "error",
+                        message,
                     })
                 }
 
-                message = `El admin NO logro eliminar el producto con el id: ${id}`;
-
-                return res.status(400).send({
-                    status: "error",
-                    message,
-                })
+                message = `El admin elimino el producto con el id: ${id}`;
 
             }
             // como el middleware checkrol se encarga dejarte acceder al endpoint solo si sos rol "premium" o "admin" no te tenes q preocupar de q te llegue otra cosa 
             else {
                 const { email } = decodedToken;
 
-                const product = await productService.getById(id);
-
-                const { owner } = product;
-                
                 if (email === owner) {
                     result = await productService.deleteOne(id);
 
                     message = `El usuario premium : ${email} logro eliminar con exito el producto que el creo con el id: ${id}`;
+
                 }
                 else {
                     message = `El usuario premium : ${email} no tiene permisos para eliminar el producto con el id: ${id}`;
@@ -299,6 +299,10 @@ class ProductsControllers {
                     errorCode: ERRORS.PRODUCT_ERROR
                 })
             }
+
+            const sendEmail = await emailSender(owner, message, "Producto eliminado");
+
+            console.log("email enviado");
 
             res.send({
                 status: "success",

@@ -22,7 +22,7 @@ class SessionControler {
             <a href="http://localhost:8080/">Ir a la pagina</a>
             </div>`;
             // ACA ACORDATE DE MODIFICAR EL LINK PARA Q SEA CON EL DE RENDER O RAILWAY
-            // HACE LO MISMO CON GITHUB PASSPORTt
+            // HACE LO MISMO CON GITHUB PASSPORT
 
             const respond = await emailSender(email, template, subject);
 
