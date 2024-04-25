@@ -26,7 +26,6 @@ form.addEventListener("submit", async (e) => {
 
     if (aux === "success") {
         const endpointPremium = `/api/users/premium/${userId}`;
-        console.log(endpointPremium);
 
         const request = await fetch(endpointPremium, {
             method: "POST",
@@ -42,6 +41,19 @@ form.addEventListener("submit", async (e) => {
             alert(`Felicidades por obtener rol premium, ahora podras crear, actualizar y eliminar tus propios products, PARA VER LOS CAMBIOS VUELVA A INICAR SESSION`);
         }
 
-        location.replace("http://localhost:8080/");
+        let url = location.href;
+
+        if (url.includes("onrender")) {
+            location.replace("https://node-proyecto-final.onrender.com/");
+        }
+        else if (url.includes("railway")) {
+            location.replace("https://nodeproyectofinal-production.up.railway.app/");
+        }
+        // else if (url.includes("vercel")) { //esto a futuro para cuando suba el proyecto a vercel tambien
+        //     location.replace("url de vercel");
+        // }
+        else{
+            location.replace("http://localhost:8080/");
+        }
     }
 })

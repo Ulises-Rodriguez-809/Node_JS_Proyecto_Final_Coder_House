@@ -19,9 +19,9 @@ class SessionControler {
             <p>No perder este id ya que te servira para poder obtener el rol premium en caso de quererlo</p>
             <img src="https://www.ceupe.com/images/easyblog_articles/3625/b2ap3_large_que-es-un-tienda-online.png" style="width:250px; height : 250px"/>
             <p>Ya puedes empezar a usar nuestros servicios</p>
-            <a href="http://localhost:8080/">Ir a la pagina (localhost)</a>
-            <a href="https://nodeproyectofinal-production.up.railway.app/">Ir a la pagina (railway)</a>
-            <a href="https://node-proyecto-final.onrender.com/">Ir a la pagina (render)</a>
+            <div><a href="http://localhost:8080/">Ir a la pagina (localhost)</a></div>
+            <div><a href="https://nodeproyectofinal-production.up.railway.app/">Ir a la pagina (railway)</a></div>
+            <div><a href="https://node-proyecto-final.onrender.com/">Ir a la pagina (render)</a></div>
             </div>`;
 
             const respond = await emailSender(email, template, subject);
@@ -78,7 +78,7 @@ class SessionControler {
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
         const day = date.getDate();
-        const hour = date.getHours();
+        const hour = date.getHours(); //render y railway guardan el horario 3 horas mas adelantedas del horario de argentina, supongo q es por donde estan los servidores q el objeto Date esta tomando el horario de donde este el server
         const minuts = date.getMinutes();
         const seconds = date.getSeconds();
 

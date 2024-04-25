@@ -46,9 +46,11 @@ finalizarCompra.addEventListener("click", () => {
     })
         .then(result => result.json())
         .then(json => {
-            console.log(json)
-
-            alert("Compra finalizada");
+            if (json.status === "success") {
+                alert("Compra finalizada");
+            } else {
+                alert("Error al intentar confirmar la compra, contacte con el servicio al cliente");
+            }
         })
 
 })
@@ -80,8 +82,6 @@ arrayForms.forEach((form) => {
 
         data.forEach((value, key) => obj[key] = value)
 
-        console.log(obj);
-
         fetch(`/api/cartsDB/${idCart}/product/${obj.id}`, {
             method: "POST",
             body: JSON.stringify(obj),
@@ -91,9 +91,11 @@ arrayForms.forEach((form) => {
         })
             .then(result => result.json())
             .then(json => {
-                console.log(json)
-
-                alert("Producto comprado")
+                if (json.status === "success") {
+                    alert("Producto comprado");
+                } else {
+                    alert("No se logro comprar el producto, contacte con el servicio al cliente");
+                }
             })
     })
 });
