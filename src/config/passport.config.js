@@ -123,13 +123,12 @@ const inicializePassport = () => {
 
     passport.use("github", new GitHubStrategy(
         {
-            clientID: options.CLIENT_ID,
-            clientSecret: options.CLIENT_SECRET,
-            callbackURL: options.CALLBACK_URL,
+            clientID: process.env.CLIENT_ID,
+            clientSecret: process.env.CLIENT_SECRET,
+            callbackURL: process.env.CALLBACK_URL,
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
-                // console.log(profile);
 
                 const userName = profile._json.name.split(" ");
 
