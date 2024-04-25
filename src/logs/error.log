@@ -650,3 +650,4 @@
 {"level":"warning","message":"Datos del usuario incorrectos"}
 {"level":"info","message":"usuario con rol user"}
 {"level":"info","message":"usuario con rol user"}
+{"level":"info","message":"Cookie limpiada con exito"}

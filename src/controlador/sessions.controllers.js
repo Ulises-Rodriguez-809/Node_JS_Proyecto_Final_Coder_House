@@ -213,7 +213,7 @@ class SessionControler {
 
             res.cookie(options.COOKIE_WORD, token, { httpOnly: true, maxAge: 3600000 })
 
-            res.redirect("/products");
+            res.redirect("/home");
 
         } catch (error) {
             req.logger.error("No se encontro la cuenta de Github del usuario");
