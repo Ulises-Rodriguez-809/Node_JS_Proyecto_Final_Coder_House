@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { cartService, productService, userService } from '../respository/index.repository.js';
+import { cartService, productService, userService, ticketService } from '../respository/index.repository.js';
 
 class ViewsControllers {
     static login = (req, res) => {
@@ -134,10 +134,19 @@ class ViewsControllers {
             const cartId = req.params.cartId;
 
             const cart = await cartService.getById(cartId);
+
+            if (!cart) {
+                return res.status(500).send({
+                    status : "error",
+                    payload : "No se encontro el cart"
+                })
+            }
+
             const { products } = cart;
 
             const auxArray = []
-
+            
+            // esto xq la prop __v:0 q viene de la db hace q handlebars tire error
             products.forEach(element => {
                 const { product, quantity } = element;
 
@@ -166,8 +175,34 @@ class ViewsControllers {
 
                 auxArray.push(auxProduct);
             });
+            
+            const tokenInfo = req.cookies["jwt-cookie"];
 
-            res.render("cart", { products: auxArray });
+            const decodedToken = jwt.decode(tokenInfo);
+
+            const { email } = decodedToken;
+
+            let tickets = await ticketService.getAll(email);
+
+            const auxTickets = [];
+
+            // esto xq la prop __v:0 q viene de la db hace q handlebars tire error
+            tickets.forEach(element => {
+                const {_id, code, purchase_datetime,amount,purchaser} = element;
+
+                const aux = {
+                    _id,
+                    code,
+                    purchase_datetime,
+                    amount,
+                    purchaser,
+                }
+
+                auxTickets.push(aux);
+            })
+
+            res.render("cart", { products: auxArray, auxTickets });
+
         } catch (error) {
             req.logger.warning("No se logro encontrar el cart del usuario");
         }

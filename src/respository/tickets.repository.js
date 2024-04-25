@@ -9,6 +9,12 @@ export class TicketsRepository{
         return result;
     }
 
+    async getAll(email){
+        const result = await this.dao.getAllTickets(email);
+
+        return result;
+    }
+
     async amount(arrayProducts){
         const result = await this.dao.calculateAmount(arrayProducts);
 

@@ -12,10 +12,20 @@
 </header>
 <main>
     <div>
-        <h1>Cart list of products</h1>
-        {{!-- ACA AGREGA LA INFO DEL TICKET DE COMPRA PARA Q SE PUEDA VER EN CASO DE ERROR EN EL ENVIADO DEL MAILls --}}
+        <h1>Lista de productos comprados y informacion de tickets de compra</h1>
         <div>
-            <h2>Ticket de compra informacion:</h2>
+            <h2>Todos tus tickets de compra informacion:</h2>
+            <ul>
+                {{#each auxTickets}}
+                <li>
+                    id : {{this._id}}<br>
+                    codigo de compra : {{this.code}}<br>
+                    Dia de la compra : {{this.purchase_datetime}}<br>
+                    Total : {{this.amount}}<br>
+                    Comprador : {{this.purchaser}}<br>
+                </li><br>
+                {{/each}}
+            </ul>
         </div>
         <div>
             <h3>Productos comprados:</h3>

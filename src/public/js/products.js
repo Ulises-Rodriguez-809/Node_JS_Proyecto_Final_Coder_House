@@ -46,6 +46,7 @@ finalizarCompra.addEventListener("click", () => {
     })
         .then(result => result.json())
         .then(json => {
+            console.log(json);
             if (json.status === "success") {
                 alert("Compra finalizada");
             } else {

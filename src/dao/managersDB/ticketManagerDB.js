@@ -26,6 +26,24 @@ export class TicketManager {
         }
     }
 
+    async getAllTickets(email) {
+        try {
+
+            const allTikcet = await ticketModel.find({})
+            
+            if (!allTikcet) {
+                return "Ticket de compra no encontrado";
+            }
+
+            const aux = allTikcet.filter(ticket => ticket.purchaser === email);
+
+            return aux;
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
     async updateProductsStock(arrayProducts){
         for (const item of arrayProducts) {
             const aux = await Product.getProductById(item.product.id);
@@ -110,7 +128,7 @@ export class TicketManager {
 
             const [day, month, year] = [
                 date.getDate(),
-                date.getMonth(),
+                date.getMonth() + 1,
                 date.getFullYear(),
             ];
 
