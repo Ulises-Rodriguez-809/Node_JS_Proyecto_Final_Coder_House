@@ -641,3 +641,5 @@
 {"level":"error","message":"No se logro añadir el producto al cart"}
 {"level":"info","message":"Cookie limpiada con exito"}
 {"level":"info","message":"usuario con rol admin"}
+{"level":"info","message":"usuario con rol user"}
+{"level":"info","message":"Cookie limpiada con exito"}

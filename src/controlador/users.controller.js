@@ -222,7 +222,7 @@ class UsersControllers {
             // obtengo la fecha actual
             const currentDate = new Date();
             const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth();
+            const currentMonth = currentDate.getMonth() + 1; //esto por los meses de Date van de 0-11 y como le sumaste uno en session.controller aca tambien tenes q sumar 1
             const currentDay = currentDate.getDate();
 
             for (let user of users) {

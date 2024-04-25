@@ -19,10 +19,10 @@ class SessionControler {
             <p>No perder este id ya que te servira para poder obtener el rol premium en caso de quererlo</p>
             <img src="https://www.ceupe.com/images/easyblog_articles/3625/b2ap3_large_que-es-un-tienda-online.png" style="width:250px; height : 250px"/>
             <p>Ya puedes empezar a usar nuestros servicios</p>
-            <a href="http://localhost:8080/">Ir a la pagina</a>
+            <a href="http://localhost:8080/">Ir a la pagina (localhost)</a>
+            <a href="https://nodeproyectofinal-production.up.railway.app/">Ir a la pagina (railway)</a>
+            <a href="https://node-proyecto-final.onrender.com/">Ir a la pagina (render)</a>
             </div>`;
-            // ACA ACORDATE DE MODIFICAR EL LINK PARA Q SEA CON EL DE RENDER O RAILWAY
-            // HACE LO MISMO CON GITHUB PASSPORT
 
             const respond = await emailSender(email, template, subject);
 
@@ -57,7 +57,7 @@ class SessionControler {
     static updateLastLogin = async (req, res) => {
         const date = new Date();
         const year = date.getFullYear();
-        const month = date.getMonth();
+        const month = date.getMonth() + 1; //esto xq los meses los toma desde el 0-11
         const day = date.getDate();
         const hour = date.getHours();
         const minuts = date.getMinutes();
@@ -76,7 +76,7 @@ class SessionControler {
     static updateLastLogout = async (req, res) => {
         const date = new Date();
         const year = date.getFullYear();
-        const month = date.getMonth();
+        const month = date.getMonth() + 1;
         const day = date.getDate();
         const hour = date.getHours();
         const minuts = date.getMinutes();
