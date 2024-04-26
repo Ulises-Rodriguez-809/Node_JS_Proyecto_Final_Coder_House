@@ -486,6 +486,180 @@ describe('super test de los endpoints del ecommerce', () => {
         })
     })
 
+    describe('users endpoints test', () => { 
+        let cookie;
+
+        it("enpoint: /api/users/ || metodo: GET, obtener todos los usuarios", async function(){
+            this.timeout(15000);
+
+            const mockUser = {
+                email: "adminCoder@gmail.com",
+                password: "adminCod3r123"
+            }
+
+            const responseLogin = await requester.post("/api/sessions/login").send(mockUser);
+
+            const cookieResult = responseLogin.headers["set-cookie"][0];
+
+            cookie = {
+                name: cookieResult.split("=")[0],
+                value: cookieResult.split("=")[1]
+            }
+
+            const response = await requester.get("/api/users").set("Cookie", [`${cookie.name}=${cookie.value}`]);
+
+            const { statusCode, _body } = response;
+            const { status, payload } = _body;
+
+            expect(response).to.be.an("object");
+
+            expect(statusCode).to.be.deep.equal(200);
+
+            expect(_body).to.have.property("status");
+            expect(_body).to.have.property("payload");
+
+            expect(status).to.be.deep.equal("success");
+            expect(payload).to.be.an("array");
+            expect(payload).to.have.lengthOf.at.least(1);
+        })
+
+        it("enpoint: /api/users/getUser/:userEmail || metodo: GET, obtener un usuario por su email", async function(){
+            this.timeout(15000);
+
+            const mockUser = {
+                email: "adminCoder@gmail.com",
+                password: "adminCod3r123"
+            }
+
+            const responseLogin = await requester.post("/api/sessions/login").send(mockUser);
+
+            const cookieResult = responseLogin.headers["set-cookie"][0];
+
+            cookie = {
+                name: cookieResult.split("=")[0],
+                value: cookieResult.split("=")[1]
+            }
+
+            const response = await requester.get("/api/users/getUser/ulirodriguez5@gmail.com").set("Cookie", [`${cookie.name}=${cookie.value}`]);
+
+            const { statusCode, _body } = response;
+            const { status, payload } = _body;
+
+            expect(response).to.be.an("object");
+
+            expect(statusCode).to.be.deep.equal(200);
+
+            expect(_body).to.have.property("status");
+            expect(_body).to.have.property("payload");
+
+            expect(status).to.be.deep.equal("success");
+            expect(payload).to.be.an("object");
+            expect(payload).to.have.property("full_name");
+            expect(payload).to.have.property("email");
+            expect(payload).to.have.property("age");
+            expect(payload).to.have.property("rol");
+            expect(payload).to.have.property("cart");
+            expect(payload).to.have.property("products");
+
+        })
+
+        it("enpoint: /api/users/ || metodo: PUT, El admin puede modificar el rol del usuario", async function(){
+            this.timeout(15000);
+
+            const mockUser = {
+                email: "adminCoder@gmail.com",
+                password: "adminCod3r123"
+            }
+
+            const auxBody = {
+                id : "662be7dbac0d17cec4d17484",
+                rol: "premium"
+            }
+
+            const responseLogin = await requester.post("/api/sessions/login").send(mockUser);
+
+            const cookieResult = responseLogin.headers["set-cookie"][0];
+
+            cookie = {
+                name: cookieResult.split("=")[0],
+                value: cookieResult.split("=")[1]
+            }
+
+            const response = await requester.put("/api/users/").set("Cookie", [`${cookie.name}=${cookie.value}`]).send(auxBody);
+
+            const { statusCode, _body } = response;
+            const { status, payload } = _body;
+
+            expect(response).to.be.an("object");
+
+            expect(statusCode).to.be.deep.equal(200);
+
+            expect(_body).to.have.property("status");
+            expect(_body).to.have.property("payload");
+
+            expect(status).to.be.deep.equal("success");
+            expect(payload).to.be.an("string");
+
+        })
+
+        it("enpoint: /api/users/:userId || metodo: DELETE, El admin puede eliminar un usuario por su id", async function(){
+            this.timeout(15000);
+
+            const mockUser = {
+                email: "adminCoder@gmail.com",
+                password: "adminCod3r123"
+            }
+
+            const id = "662be61fbd43e13a1d0d83f9";
+
+            const responseLogin = await requester.post("/api/sessions/login").send(mockUser);
+
+            const cookieResult = responseLogin.headers["set-cookie"][0];
+
+            cookie = {
+                name: cookieResult.split("=")[0],
+                value: cookieResult.split("=")[1]
+            }
+
+            const response = await requester.delete(`/api/users/${id}`).set("Cookie", [`${cookie.name}=${cookie.value}`]);
+            const { statusCode, _body } = response;
+            const { status, payload } = _body;
+
+            expect(response).to.be.an("object");
+
+            expect(statusCode).to.be.deep.equal(200);
+
+            expect(_body).to.have.property("status");
+            expect(_body).to.have.property("payload");
+
+            expect(status).to.be.deep.equal("success");
+            expect(payload).to.be.an("string");
+
+        })
+
+        it("enpoint: /api/users/ || metodo: DELETE, El admin puede eliminar todos los usuarios inactivos", async function(){
+            this.timeout(15000);
+
+            const mockUser = {
+                email: "adminCoder@gmail.com",
+                password: "adminCod3r123"
+            }
+
+            const responseLogin = await requester.post("/api/sessions/login").send(mockUser);
+
+            const cookieResult = responseLogin.headers["set-cookie"][0];
+
+            cookie = {
+                name: cookieResult.split("=")[0],
+                value: cookieResult.split("=")[1]
+            }
+
+            const response = await requester.delete(`/api/users/`).set("Cookie", [`${cookie.name}=${cookie.value}`]);
+            
+            expect(response).to.be.an("object");
+        })
+    })
+
     describe('sessions endpoints test', () => {
         // efectivamente borro toda la colleccion
         // beforeEach(async function () {
@@ -626,6 +800,4 @@ describe('super test de los endpoints del ecommerce', () => {
             await userModel.deleteOne({ email: emailUser });
         })
     })
-
-
 })

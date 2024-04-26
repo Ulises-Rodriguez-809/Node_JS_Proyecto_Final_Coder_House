@@ -11,7 +11,7 @@ router.get("/:productId", ProductsControllers.getProductById);
 
 router.post("/", checkRole(["premium", "admin"]), uploader.array('thumbnails'), ProductsControllers.addProduct);
 
-router.put("/:productId", checkRole(["admin"]), uploader.array('thumbnails'), ProductsControllers.updateProduct);
+router.put("/:productId", checkRole(["premium","admin"]), uploader.array('thumbnails'), ProductsControllers.updateProduct);
 
 router.delete("/:productId", checkRole(["premium", "admin"]), ProductsControllers.deleteProduct);
 

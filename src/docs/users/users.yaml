@@ -1,0 +1,150 @@
+paths:
+  /api/users/:
+    get:
+      summary: Obtiene todos los usuarios sin información sensible
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Array de usuarios sin información sensible
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "500":
+          description: Error al intentar obtener los usuarios de la DB
+    put:
+      summary: Permite al admin modificar el rol de un usuario
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Array de usuarios sin información sensible
+        "400":
+          description: El rol asignado debe ser alguna de las opciones admin | user | premium
+        "500":
+          description: Error del servidor
+    delete:
+      summary: Permite al admin eliminar todos los usuarios inavtivos en los ultimos 2 dias
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Usuarios inactivos eliminados
+        "500":
+          description: Error del servidor
+  /api/users/getUser/{userEmail}:
+    get:
+      summary: Obtiene el usuario por su email sin informacion sensble
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Objecto con la info del usuario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/getUser/GetUser"
+        "500":
+          description: Error al intentar obtener el usuario de la DB
+  /api/users/premium/{userId}:
+    post:
+      summary: Permite que el usuario obtenga el rol premium
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Rol cambiado de USER a PREMIUM con exito
+        "500":
+          description: Error al intentar intentar obtener el rol premium
+  /api/users/{userId}/documents:
+    post:
+      summary: Permite que el usuario cargue la documentacion necesaria para obtener el rol premium
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Archivos cargados con exito
+        "500":
+          description: Error al intentar cargar la documentacion
+  /api/users/{userId}:
+    delete:
+      summary: Permite al admin eliminar un usuario por su ID
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Usuario con el id IdDelUsuario eliminado con exito
+        "500":
+          description: Error del servidor
+components:
+  schemas:
+    Users:
+      type: object
+      properties:
+        name:
+          type: string
+          description: nombre completo del usuario
+        email:
+          type: string
+          description: email del usuario
+        rol:
+          type: string
+          description: rol del usuario
+      example:
+        - name: testing tes
+          email: testing@gmail.com
+          rol: user
+        - name: pepe gonzales
+          email: pepe@gmail.com
+          rol: premium
+  getUser:
+    GetUser:
+      type: object
+      properties:
+        status:
+          type: string
+          description: estado de la peticion
+        payload:
+          type: object
+          properties:
+            full_name:
+              type: string 
+              description: nombre completo del usuario
+            email:
+              type: string
+              description: email del usuario
+            age:
+              type: number
+              description: edad del usuario
+            rol:
+              type: string
+              description: rol del usuario
+            cart:
+              type: string
+              description: id del cart del usuario
+            products:
+              type: object
+              description: objeto con los productos comprados por el usuario
+      example:
+        status : "success"
+        payload:
+          full_name: pepe
+          email: pepe@gmail.com
+          age: 40
+          rol: user
+          cart: 660df5c4c7663333d106c5eb
+          products:
+            product:
+              _id: ObjectId('657f6d0db3f9db4a9c00978a')
+              title: cafe
+              descripcion: cafe bosla 500g
+              code: c4f3
+              price: 1200
+              status: success
+              stock: 20
+              category: bebida
+              thumbanails: cafeUrl1
+              owner: admin
+            quantity: 3
+            _id: ObjectId('6618360aac3d8320c37326f1')

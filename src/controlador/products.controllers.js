@@ -183,8 +183,10 @@ class ProductsControllers {
         try {
             // const fields = req.body;
             const id = req.params.productId;
-
             const fields = JSON.parse(JSON.stringify(req.body));
+            
+            let message = "";
+            let result = "";
 
             if (!id || !fields) {
                 req.logger.warning(`Los campos necesarios para actualizar el producto estan vacios`);
@@ -199,7 +201,47 @@ class ProductsControllers {
 
             fields.thumbnails = [...req.files];
 
-            const result = await productService.updateOne(id, fields);
+            const product = await productService.getById(id);
+
+            const { owner } = product;
+
+            const tokenInfo = req.cookies["jwt-cookie"];
+
+            const decodedToken = jwt.decode(tokenInfo);
+
+            if (decodedToken.rol === "admin") {
+                result = await productService.updateOne(id, fields);
+
+                if (!result) {
+                    message = `El admin NO logro modificar el producto con el id: ${id}`;
+                    
+                    return res.status(400).send({
+                        status: "error",
+                        message,
+                    })
+                }
+
+                message = `El admin modifico el producto con el id: ${id}`;
+            }
+            else{
+                const { email } = decodedToken;
+
+                if (email === owner) {
+                    result = await productService.updateOne(id, fields);
+
+                    message = `El usuario premium : ${email} logro modificar con exito el producto que el creo con el id: ${id}`;
+
+                }
+                else {
+                    message = `El usuario premium : ${email} no tiene permisos para modificar el producto con el id: ${id}`;
+
+                    return res.status(400).send({
+                        status: "error",
+                        message,
+                        payload: decodedToken.rol
+                    })
+                }
+            }
 
             if (typeof result === "string") {
                 req.logger.warning(`No se logro actualizar el producto : ${id}`);
@@ -301,8 +343,6 @@ class ProductsControllers {
             }
 
             const sendEmail = await emailSender(owner, message, "Producto eliminado");
-
-            console.log("email enviado");
 
             res.send({
                 status: "success",

@@ -6,9 +6,6 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test/ecommerce.test.js --timeount 10000 --exit",
-    "test-router-products": "mocha test/routerProducts.test.js --timeount 10000",
-    "test-router-carts": "mocha test/routerCarts.test.js --timeount 10000",
-    "test-router-sessions": "mocha test/routerSessions.test.js --timeount 10000",
     "start": "node ./src/app.js",
     "dev": "nodemon ./src/app.js"
   },

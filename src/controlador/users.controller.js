@@ -151,8 +151,7 @@ class UsersControllers {
             const auxArray = ["admin","user","premium"];
 
             if (!auxArray.includes(rol)) {
-                console.log("entro");
-                return res.status(500).send({
+                return res.status(400).send({
                     status: "error",
                     payload: "El rol asignado debe ser alguna de las opciones :  admin | user | premium"
                 })

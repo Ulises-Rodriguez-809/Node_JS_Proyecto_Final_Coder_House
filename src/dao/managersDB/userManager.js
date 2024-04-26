@@ -53,7 +53,7 @@ export class Users {
 
     deleteUser = async(id)=>{
 
-        let resutl = await userModel.findByIdAndDelete(id);
+        let resutl = await userModel.deleteOne({ _id: id });
 
         return resutl;
     }

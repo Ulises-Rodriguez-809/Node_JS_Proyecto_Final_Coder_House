@@ -39,8 +39,6 @@ const storage = multer.diskStorage({
         // si es una img de producto en una carpeta llamada proeducto
         const {fieldname,mimetype} = file;
 
-        console.log(file);
-
         if (mimetype.includes("/pdf") || mimetype.includes("/docx") || mimetype.includes("/xlsx") || mimetype.includes("/pptx")) {
             cb(null,`${__dirname}/public/documents`);
         }
@@ -48,7 +46,6 @@ const storage = multer.diskStorage({
             
             // fieldname te trae el nombre del input donde se subieron las iamgen, usa eso para saber si lo q se manda a multer es una imagen de un producto o otro tipo de imagen
             // esto te es util ya q el nombre de la imagen puede ser cualquier cosa por lo caul usas el input name para saber en q carpeta guardar
-            console.log("ENTRO EN PROFILE");
             if (fieldname.includes("thumbnails")) {
                 cb(null,`${__dirname}/public/images/products`);
             } else {
