@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { cartService, productService, userService, ticketService } from '../respository/index.repository.js';
+import { createTicketsArray, productsStock } from '../utils.js';
 
 class ViewsControllers {
     static login = (req, res) => {
@@ -63,7 +64,7 @@ class ViewsControllers {
 
             const decodedToken = jwt.decode(tokenInfo);
 
-            const { full_name, rol ,cartID } = decodedToken;
+            const { full_name, rol, cartID } = decodedToken;
 
             const cartUrl = `/carts/${cartID}`;
 
@@ -137,45 +138,19 @@ class ViewsControllers {
 
             if (!cart) {
                 return res.status(500).send({
-                    status : "error",
-                    payload : "No se encontro el cart"
+                    status: "error",
+                    payload: "No se encontro el cart"
                 })
             }
 
             const { products } = cart;
 
-            const auxArray = []
-            
-            // esto xq la prop __v:0 q viene de la db hace q handlebars tire error
-            products.forEach(element => {
-                const { product, quantity } = element;
+            const inStock = [];
+            const notStock = [];
 
-                const { _id,
-                    title,
-                    description,
-                    code,
-                    price,
-                    status,
-                    stock,
-                    category,
-                    thumbnails } = product;
+            const listProductsStock = await productsStock(products);
+            const {productsNotStock, productsInStock} = listProductsStock;
 
-                const auxProduct = {
-                    _id,
-                    quantity,
-                    title,
-                    description,
-                    code,
-                    price,
-                    status,
-                    stock,
-                    category,
-                    thumbnails
-                }
-
-                auxArray.push(auxProduct);
-            });
-            
             const tokenInfo = req.cookies["jwt-cookie"];
 
             const decodedToken = jwt.decode(tokenInfo);
@@ -184,24 +159,9 @@ class ViewsControllers {
 
             let tickets = await ticketService.getAll(email);
 
-            const auxTickets = [];
-
-            // esto xq la prop __v:0 q viene de la db hace q handlebars tire error
-            tickets.forEach(element => {
-                const {_id, code, purchase_datetime,amount,purchaser} = element;
-
-                const aux = {
-                    _id,
-                    code,
-                    purchase_datetime,
-                    amount,
-                    purchaser,
-                }
-
-                auxTickets.push(aux);
-            })
-
-            res.render("cart", { products: auxArray, auxTickets });
+            const auxTickets = createTicketsArray(tickets);
+            
+            res.render("cart", { products: productsInStock, notStock : productsNotStock, auxTickets });
 
         } catch (error) {
             req.logger.warning("No se logro encontrar el cart del usuario");

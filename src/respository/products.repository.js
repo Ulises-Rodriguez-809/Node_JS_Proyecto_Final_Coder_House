@@ -16,7 +16,7 @@ export class ProductsRepository{
     }
 
     async isInStock(amount,id){
-        const result = await this.dao.productInStock(amount,id);
+        const result = await this.dao.isInStock(amount,id);
 
         return result;
     }

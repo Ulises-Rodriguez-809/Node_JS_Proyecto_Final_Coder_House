@@ -258,7 +258,6 @@ class CartsControllers {
     }
 
     static clearCart = async (req, res, next) => {
-
         try {
             const id = req.params.cartId;
 
@@ -273,7 +272,6 @@ class CartsControllers {
                     message: result,
                     errorCode: ERRORS.CART_ERROR
                 })
-
             }
 
             res.send({

@@ -48,7 +48,7 @@ finalizarCompra.addEventListener("click", () => {
         .then(json => {
             console.log(json);
             if (json.status === "success") {
-                alert("Compra finalizada");
+                alert("Compra finalizada, tu ticket fue enviado a tu email");
             } else {
                 alert("Error al intentar confirmar la compra, contacte con el servicio al cliente");
             }

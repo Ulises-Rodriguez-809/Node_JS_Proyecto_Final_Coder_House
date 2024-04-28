@@ -121,6 +121,7 @@ const inicializePassport = () => {
         done(null, user);
     })
 
+    // recorda cambiar esto entre dev y render/railway
     passport.use("github", new GitHubStrategy(
         {
             // clientID: options.CLIENT_ID,

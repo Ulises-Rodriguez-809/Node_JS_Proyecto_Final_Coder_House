@@ -14,29 +14,21 @@
     {{!-- ahora solo te falta ponerle un btn para eliminar los productos o vaciar todo el cart --}}
     {{!-- recorda cambiar todos los "jwt-cokkie" por preccess.env.cok..... --}}
     {{!-- recorda cambiar todos los options.ALGO pro process.env.ALGO (igual andan asi q a lo mejor no hace falta) --}}
-    {{!-- limpia el codigo fijate si podes reutilizar codigo y esas cosas podes mandar el codigo reutilizado a utils como funciones --}}
+    {{!-- limpia el codigo fijate si podes reutilizar codigo y esas cosas podes mandar el codigo reutilizado a utils
+    como funcioness --}}
     <div>
-        <h1>Lista de productos comprados y informacion de tickets de compra</h1>
+        <h1>Lista de productos comprados, productos sin stock e informacion de tickets de compra</h1>
         <div>
-            <h2>Todos tus tickets de compra informacion:</h2>
-            <ul>
-                {{#each auxTickets}}
-                <li>
-                    id : {{this._id}}<br>
-                    codigo de compra : {{this.code}}<br>
-                    Dia de la compra : {{this.purchase_datetime}}<br>
-                    Total : {{this.amount}}<br>
-                    Comprador : {{this.purchaser}}<br>
-                </li><br>
-                {{/each}}
-            </ul>
+            <div>
+                <button type="button" id="clearCart">Vacias carrito</button>
+            </div>
         </div>
         <div>
-            <h3>Productos comprados:</h3>
+            <h2>Productos comprados:</h2>
             <ul>
                 {{#each products}}
                 <li>
-                    id : {{this._id}}<br>
+                    id : {{this.id}}<br>
                     cantidad comprada : {{this.quantity}}<br>
                     titulo : {{this.title}}<br>
                     descripcion : {{this.description}}<br>
@@ -45,9 +37,44 @@
                     status : {{this.status}}<br>
                     categoria : {{this.category}}<br>
                     miniaturas : {{this.thumbnails}}<br>
+                    <button type="button" id={{this.id}} class="removeProduct">Remover producto</button>
+                </li><br>
+                {{/each}}
+            </ul>
+        </div>
+        <div>
+            <h3>Productos sin stock disponible</h3>
+            <ul>
+                {{#each notStock}}
+                <li class={{this.id}}>
+                    id : {{this.id}}<br>
+                    cantidad comprada : {{this.quantity}}<br>
+                    titulo : {{this.title}}<br>
+                    descripcion : {{this.description}}<br>
+                    codigo : {{this.code}}<br>
+                    precio : {{this.price}}<br>
+                    status : {{this.status}}<br>
+                    categoria : {{this.category}}<br>
+                    miniaturas : {{this.thumbnails}}<br>
+                    <button type="button" id={{this.id}} class="removeProduct">Remover producto</button>
+                </li><br>
+                {{/each}}
+            </ul>
+        </div>
+        <div>
+            <h3>Todos tus tickets de compra informacion:</h3>
+            <ul>
+                {{#each auxTickets}}
+                <li>
+                    id : {{this.id}}<br>
+                    codigo de compra : {{this.code}}<br>
+                    Dia de la compra : {{this.purchase_datetime}}<br>
+                    Total : {{this.amount}}<br>
+                    Comprador : {{this.purchaser}}<br>
                 </li><br>
                 {{/each}}
             </ul>
         </div>
     </div>
 </main>
+<script src="/js/cart.js"></script>
