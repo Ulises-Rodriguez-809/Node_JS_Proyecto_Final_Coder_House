@@ -172,10 +172,8 @@ export const generateEmailToken = (email, expireTime) => {
 }
 
 export const verifyEmailToken = (token) => {
-    console.log("verifiEmailToken");
     try {
         const info = jwt.verify(token, options.EMAIL_TOKEN);
-        console.log(info);
 
         return info.email;
 

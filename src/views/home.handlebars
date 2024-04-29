@@ -1,11 +1,11 @@
 <header>
     <nav>
         <div>
-            <ul id="ul-home">
+            <ul id="ul-home" class="ulLinkContainer">
                 <li><a href="/products">Products</a></li>
                 <li><a href={{user.cartUrl}}>Cart</a></li>
-                <li><a href="/api/sessions/current">Informacion del usuario</a></li>
-                <li><a href="/realtimeproducts">Real Time Products</a></li>
+                <li><a href="/realtimeproducts">New Products</a></li>
+                <li><a href="/api/sessions/current">Perfil</a></li>
             </ul>
         </div>
     </nav>
@@ -13,7 +13,13 @@
 <main>
     <h1>Bienvenido <span>{{user.full_name}}</span> tu rol actual es <span id="user-rol">{{user.rol}}</span></h1>
     <p>Esta es nuestra tienda donde podras encontrar una gran variedad de productos</p>
-    <p></p>
-    <p>Agrega css, algunas imagenes de productos</p>
+    <p>Instrucciones</p>
+    <ul>
+        <li>En el apartado "Products" podras comprar productos, obtener el rol premium, realizar la compra final</li>
+        <li>En "Cart" podras ver los productos comprados y tickets de compras anteriores</li>
+        <li>En "New Product" si posees el rol "premium" podras crear, eliminar y actualizar tus propios productos</li>
+        <li>"Perfil" te permite ver tus datos</li>
+    </ul>
 </main>
 <script src="/js/home.js"></script>
+<link rel="stylesheet" href="/css/home.css">

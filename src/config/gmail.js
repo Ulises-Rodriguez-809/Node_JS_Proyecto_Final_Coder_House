@@ -28,10 +28,21 @@ const transporter = nodemailer.createTransport({
 // 1- q si el token se modifica no permita seguir usando la app
 // 2- q la persona q accedio a la vista de recuperacion de contraseña diga ser quien es
 // 3- ver el tiempo de expiracion del token
-export const sendRecoverPassword = async (email, token) => {
+export const sendRecoverPassword = async (email, token, hostname) => {
     // la info del token luego la obtenes en sessions.router.js (la logica en el controler) obteniendo la query y ahi te fijas 1-2-3
     // con este link el usuario cuando le da click lo redirecciona a la vista de resetPassword
-    const link = `http://localhost:8080/resetPassword?token=${token}`;
+    
+    let link = "";
+
+    if (hostname.includes("onrender")) {
+        link = `https://node-proyecto-final.onrender.com/resetPassword?token=${token}`;
+    }
+    else if (hostname.includes("railway")) {
+        link = `https://nodeproyectofinal-production.up.railway.app/resetPassword?token=${token}`;
+    }
+    else{
+        link = `http://localhost:8080/resetPassword?token=${token}`;
+    }
 
     const template = `
     <div>

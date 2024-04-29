@@ -1,4 +1,6 @@
-.registerContainer{
+@import url("spinner.css");
+
+.registerContainer {
     height: 750px;
     background-color: rgb(219, 218, 218);
     display: flex;
@@ -8,7 +10,7 @@
     flex-direction: column;
 }
 
-.register{
+.register {
     height: 500px;
     width: 70%;
     background-color: rgb(120, 192, 252);
@@ -20,11 +22,11 @@
     align-items: center;
 }
 
-.registerTitle{
+.registerTitle {
     font-size: 2rem;
 }
 
-.registerForm{
+.registerForm {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -33,14 +35,14 @@
     font-size: 20px;
 }
 
-.registerBtnContainer{
+.registerBtnContainer {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.registerBtnContainer>input{
+.registerBtnContainer>input {
     font-size: 20px;
     border-radius: 10px;
     width: 100px;

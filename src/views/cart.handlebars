@@ -1,17 +1,16 @@
 <header>
     <nav>
         <div>
-            <ul>
+            <ul class="ulLinkContainer">
                 <li><a href="/home">Home</a></li>
                 <li><a href="/products">Products</a></li>
-                <li><a href="/realtimeproducts">Real Time Products</a></li>
-                <li><a href="/api/sessions/current">Informacion del usuario</a></li>
+                <li><a href="/realtimeproducts">New Products</a></li>
+                <li><a href="/api/sessions/current">Perfil</a></li>
             </ul>
         </div>
     </nav>
 </header>
 <main>
-    {{!-- ahora solo te falta ponerle un btn para eliminar los productos o vaciar todo el cart --}}
     {{!-- recorda cambiar todos los "jwt-cokkie" por preccess.env.cok..... --}}
     {{!-- recorda cambiar todos los options.ALGO pro process.env.ALGO (igual andan asi q a lo mejor no hace falta) --}}
     {{!-- limpia el codigo fijate si podes reutilizar codigo y esas cosas podes mandar el codigo reutilizado a utils
@@ -78,3 +77,4 @@
     </div>
 </main>
 <script src="/js/cart.js"></script>
+<link rel="stylesheet" href="/css/cart.css">

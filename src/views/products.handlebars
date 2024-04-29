@@ -1,11 +1,11 @@
 <header>
     <nav>
         <div>
-            <ul>
+            <ul class="ulLinkContainer">
                 <li><a href="/home">Home</a></li>
                 <li><a href={{user.cartUrl}}>Cart</a></li>
-                <li><a href="/realtimeproducts">Real Time Products</a></li>
-                <li><a href="/api/sessions/current">Informacion del usuario</a></li>
+                <li><a href="/realtimeproducts">New Products</a></li>
+                <li><a href="/api/sessions/current">Perfil</a></li>
             </ul>
         </div>
     </nav>
@@ -26,7 +26,7 @@
             </ul>
         </div>
         <div class="opcionesContainer">
-            <div>
+            <div class="finalizarCompraContainer">
                 <button class="finalizarCompra opcionLink">Realizar Compra</button>
             </div>
             <div id="containerChangeRol">
@@ -82,7 +82,7 @@
                             <button type="button" class="minus">-</button>
                         </div>
                         <div class="btnCompraContainer info">
-                            <input type="submit" value="Comprar">
+                            <input type="submit" value="Comprar" class="productBtnBuy">
                         </div>
                     </div>
                 </form>
@@ -103,6 +103,4 @@
 
 </main>
 <script src="/js/products.js"></script>
-{{!--
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
 <link rel="stylesheet" href="/css/products.css">

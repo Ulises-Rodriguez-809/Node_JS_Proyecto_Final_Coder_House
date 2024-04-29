@@ -33,6 +33,14 @@ const checkRol = () => {
 }
 
 finalizarCompra.addEventListener("click", () => {
+    const finalizarCompraContainer = document.querySelector(".finalizarCompraContainer");
+    finalizarCompra.style.visibility = "hidden";
+
+    const i = document.createElement("i");
+    i.className = "gg-spinner";
+
+    finalizarCompraContainer.appendChild(i);
+
     const endpoint = `/api/cartsDB/${idCart}/purchase`;
 
     const obj = {};
@@ -46,11 +54,14 @@ finalizarCompra.addEventListener("click", () => {
     })
         .then(result => result.json())
         .then(json => {
-            console.log(json);
             if (json.status === "success") {
                 alert("Compra finalizada, tu ticket fue enviado a tu email");
+                finalizarCompraContainer.removeChild(i);
+                finalizarCompra.style.visibility = "visible";
             } else {
                 alert("Error al intentar confirmar la compra, contacte con el servicio al cliente");
+                finalizarCompraContainer.removeChild(i);
+                finalizarCompra.style.visibility = "visible";
             }
         })
 
@@ -75,7 +86,20 @@ arrayBtnsMinus.forEach((btn, index) => {
 
 arrayForms.forEach((form) => {
     form.addEventListener("submit", e => {
-        e.preventDefault()
+        e.preventDefault();
+
+        // para q solo afecte al form donde se dispara el evento
+        const currentForm = e.target;
+        const parentDiv = e.target["11"].parentElement;
+        const inputClicked = e.target["11"];
+
+
+        inputClicked.style.visibility = "hidden";
+
+        const i = document.createElement("i");
+        i.className = "gg-spinner";
+
+        parentDiv.appendChild(i);
 
         const data = new FormData(form);
 
@@ -94,8 +118,14 @@ arrayForms.forEach((form) => {
             .then(json => {
                 if (json.status === "success") {
                     alert("Producto comprado");
+                    parentDiv.removeChild(i);
+                    inputClicked.style.visibility = "visible";
+
                 } else {
                     alert("No se logro comprar el producto, contacte con el servicio al cliente");
+                    parentDiv.removeChild(i);
+                    inputClicked.style.visibility = "visible";
+
                 }
             })
     })

@@ -1,0 +1,22 @@
+.ulLinkContainer{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ulLinkContainer>li{
+    display: flex;
+    list-style: none;
+    width: 180px;
+    background-color: rgb(48, 216, 5);
+    font-size: 1.7rem;
+    border-radius: 500px;
+}
+
+.ulLinkContainer>li>a{
+    text-decoration: none;
+    color: #ffffff;
+    width: 100%;
+    text-align: center;
+}

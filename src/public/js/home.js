@@ -15,17 +15,17 @@ const checkRole = ()=>{
         ul.append(liDeleteInactiveUsers);
     }
     // caso para user con rol "user" o "premium" q solo tiene para ver la info de los usuarios pero sin btn para eliminar user inavtivos
-    else{
-        const liUsersInfo = document.createElement("li");
-        const link = document.createElement("a");
+    // else{
+    //     const liUsersInfo = document.createElement("li");
+    //     const link = document.createElement("a");
 
-        link.href = "/api/users/";
-        link.innerText = "users";
+    //     link.href = "/api/users/";
+    //     link.innerText = "users";
 
-        liUsersInfo.append(link);
+    //     liUsersInfo.append(link);
 
-        ul.append(liUsersInfo);
-    }
+    //     ul.append(liUsersInfo);
+    // }
 }
 
 checkRole();

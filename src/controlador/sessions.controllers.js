@@ -114,7 +114,6 @@ class SessionControler {
             const { first_name, last_name, age, email, password, cart, rol } = req.user;
 
             if (email === options.ADMIN_EMAIL && password === options.ADMIN_PASSWORD) {
-                console.log("admin");
                 user = {
                     full_name: `${first_name} ${last_name}`,
                     age,
@@ -228,11 +227,12 @@ class SessionControler {
     static revocerPassword = async (req, res) => {
         try {
             const { email } = req.body;
+            const hostname = req.hostname;
 
             // para porbarlo ponele 60 segundos pero para el desafio ponele 3600
             const tokenEmail = generateEmailToken(email, 3600);
 
-            const respond = await sendRecoverPassword(email, tokenEmail);
+            const respond = await sendRecoverPassword(email, tokenEmail, hostname);
 
             if (!respond) {
                 return res.status(400).send({
@@ -243,7 +243,7 @@ class SessionControler {
 
             res.send({
                 status: "success",
-                payload: "mail enviado con exito"
+                payload: "email enviado con exito"
             })
 
         } catch (error) {

@@ -5,8 +5,6 @@ form.addEventListener("submit",(e)=>{
 
     const email = document.getElementById("recoverPassEmail").value.trim();
 
-    console.log(email);
-
     if (email === "") {
         alert("Es necesario ingresar tu email para recurperar tu contraseña");
         return;

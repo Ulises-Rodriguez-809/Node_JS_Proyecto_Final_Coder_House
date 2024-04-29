@@ -3,6 +3,16 @@ const form = document.getElementById("loginForm");
 form.addEventListener("submit",(e)=>{
     e.preventDefault(); 
 
+    const loginBtnContainer = document.querySelector(".loginBtnContainer");
+
+    const loginInput = document.querySelector(".loginInput");
+    loginInput.style.visibility = "hidden";
+
+    const i = document.createElement("i");
+    i.className = "gg-spinner";
+
+    loginBtnContainer.appendChild(i);
+
     const data = new FormData(form); //Los objetos FormData le permiten compilar un conjunto de pares clave/valor para enviar mediante XMLHttpRequest
 
     const obj = {};
@@ -20,11 +30,14 @@ form.addEventListener("submit",(e)=>{
     .then(result => result.json())
     .then(json => {
         if (json.status === "success") {
-            // window.location.replace('/products');
+            loginBtnContainer.removeChild(i);
+            loginInput.style.visibility = "visible";
             window.location.replace('/home');
         }
         else{
-            alert("error en los datos")
+            alert("error en los datos");
+            loginBtnContainer.removeChild(i);
+            loginInput.style.visibility = "visible";
         }
     })
 })
