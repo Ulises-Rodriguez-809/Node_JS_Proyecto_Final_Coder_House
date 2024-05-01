@@ -17,8 +17,8 @@
                         <label for="input-get-user">Email usuario</label>
                         <input type="text" placeholder="ingresar id usuario" name="email" id="input-get-user">
                     </div>
-                    <div>
-                        <input type="submit" value="Obtener un usuarios" class="usersInputBtn">
+                    <div id="getUserContainer">
+                        <input type="submit" value="Obtener un usuarios" class="usersInputBtn getUserInput">
                     </div>
                 </form>
             <div id="divGetUser">
@@ -34,8 +34,8 @@
                     <label for="input-update-rol">rol usuario</label>
                     <input type="text" placeholder="ingresar el nuevo rol del usuario" name="rol" id="input-update-rol">
                 </div>
-                <div>
-                    <input type="submit" value="Modificar el rol de un usuario" class="usersInputBtn">
+                <div id="updateContainer">
+                    <input type="submit" value="Modificar el rol de un usuario" class="usersInputBtn updateUserInput">
                 </div>
             </form>
         </div>
@@ -45,16 +45,16 @@
                     <label for="input-delete-user">Id usuario</label>
                     <input type="text" placeholder="ingresar id usuario" name="inputDeleteUser" id="input-delete-user">
                 </div>
-                <div>
-                    <input type="submit" value="Eliminar un usuario" class="usersInputBtn">
+                <div id="deleteContainerInput">
+                    <input type="submit" value="Eliminar un usuario" class="usersInputBtn deleteInput">
                 </div>
             </form>
         </div>
         <div class="divUsers">
             <form id="formDeleteInactive" class="formUsers">
-                <div>
+                <div id="deleteInactiveContainer">
                     <label>Eliminar usuarios inactivos</label>
-                    <input type="submit" value="Eliminar usuarios inactivos" class="usersInputBtn">
+                    <input type="submit" value="Eliminar usuarios inactivos" class="usersInputBtn deleteInactiveInput">
                 </div>
             </form>
         </div>
