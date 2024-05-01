@@ -1,0 +1,62 @@
+@import url("nav.css");
+@import url("spinner.css");
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#realTimeProductsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(219, 218, 218);
+}
+
+.containersRTP {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 1rem 0;
+    width: 80%;
+    background-color: rgb(120, 192, 252);
+}
+
+.formsRTP {
+    width: 75%;
+    margin-bottom: 1rem;
+}
+
+#nuevo-producto>div,
+#actualizar-producto>div,
+#delete-product>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+#nuevo-producto>div>label,
+#nuevo-producto>div>input,
+#actualizar-producto>div>label,
+#actualizar-producto>div>input,
+#delete-product>div>label,
+#delete-product>div>input {
+    text-align: left;
+    width: 100%;
+    margin: 5px;
+    font-size: 1.5rem;
+}
+
+#nuevo-producto>div>.new-product-input,
+#actualizar-producto>div>.update-product-input,
+#actualizar-producto>div>.update-product-input,
+#delete-product>div>.delete-product-input {
+    width: 130px;
+    text-align: center;
+    border-radius: 500px;
+}

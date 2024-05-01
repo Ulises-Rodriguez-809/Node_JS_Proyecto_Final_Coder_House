@@ -5,7 +5,7 @@
                 <li><a href="/home">Home</a></li>
                 <li><a href="/products">Products</a></li>
                 <li><a href="/realtimeproducts">New Products</a></li>
-                <li><a href="/api/sessions/current">Perfil</a></li>
+                <li><a href="/profile">Perfil</a></li>
             </ul>
         </div>
     </nav>
@@ -14,62 +14,113 @@
     {{!-- recorda cambiar todos los "jwt-cokkie" por preccess.env.cok..... --}}
     {{!-- recorda cambiar todos los options.ALGO pro process.env.ALGO (igual andan asi q a lo mejor no hace falta) --}}
     {{!-- limpia el codigo fijate si podes reutilizar codigo y esas cosas podes mandar el codigo reutilizado a utils
-    como funcioness --}}
-    <div>
-        <h1>Lista de productos comprados, productos sin stock e informacion de tickets de compra</h1>
+    como funcioness
+    agrega css a esta vista--}}
+    <h1>Lista de productos comprados, productos sin stock e informacion de tickets de compra</h1>
+    <div id="cartContainer">
         <div>
             <div>
                 <button type="button" id="clearCart">Vacias carrito</button>
             </div>
         </div>
-        <div>
+        <div id="stockContainer">
             <h2>Productos comprados:</h2>
             <ul>
                 {{#each products}}
-                <li>
-                    id : {{this.id}}<br>
-                    cantidad comprada : {{this.quantity}}<br>
-                    titulo : {{this.title}}<br>
-                    descripcion : {{this.description}}<br>
-                    codigo : {{this.code}}<br>
-                    precio : {{this.price}}<br>
-                    status : {{this.status}}<br>
-                    categoria : {{this.category}}<br>
-                    miniaturas : {{this.thumbnails}}<br>
-                    <button type="button" id={{this.id}} class="removeProduct">Remover producto</button>
+                <li class="liProduct">
+                    <div>
+                        <span>id : {{this.id}}</span>
+                    </div>
+                    <div>
+                        <span>cantidad comprada : {{this.quantity}}</span>
+                    </div>
+                    <div>
+                        <span>titulo : {{this.title}}</span>
+                    </div>
+                    <div>
+                        <span>descripcion : {{this.description}}</span>
+                    </div>
+                    <div>
+                        <span>codigo : {{this.code}}</span>
+                    </div>
+                    <div>
+                        <span>precio : {{this.price}}</span>
+                    </div>
+                    <div>
+                        <span>status : {{this.status}}</span>
+                    </div>
+                    <div>
+                        <span>categoria : {{this.category}}</span>
+                    </div>
+                    <div>
+                        <span>miniaturas : {{this.thumbnails}}</span>
+                    </div>
+                    <div>
+                        <button type="button" id={{this.id}} class="removeProduct">Remover producto</button>
+                    </div>
                 </li><br>
                 {{/each}}
             </ul>
         </div>
-        <div>
+        <div id="notStockContainer">
             <h3>Productos sin stock disponible</h3>
             <ul>
                 {{#each notStock}}
-                <li class={{this.id}}>
-                    id : {{this.id}}<br>
-                    cantidad comprada : {{this.quantity}}<br>
-                    titulo : {{this.title}}<br>
-                    descripcion : {{this.description}}<br>
-                    codigo : {{this.code}}<br>
-                    precio : {{this.price}}<br>
-                    status : {{this.status}}<br>
-                    categoria : {{this.category}}<br>
-                    miniaturas : {{this.thumbnails}}<br>
-                    <button type="button" id={{this.id}} class="removeProduct">Remover producto</button>
+                <li class={{this.id}} id="notStockLi">
+                    <div>
+                        <span>id : {{this.id}}</span>
+                    </div>
+                    <div>
+                        <span>cantidad comprada : {{this.quantity}}</span>
+                    </div>
+                    <div>
+                        <span>titulo : {{this.title}}</span>
+                    </div>
+                    <div>
+                        <span>descripcion : {{this.description}}</span>
+                    </div>
+                    <div>
+                        <span>codigo : {{this.code}}</span>
+                    </div>
+                    <div>
+                        <span>precio : {{this.price}}</span>
+                    </div>
+                    <div>
+                        <span>status : {{this.status}}</span>
+                    </div>
+                    <div>
+                        <span>categoria : {{this.category}}</span>
+                    </div>
+                    <div>
+                        <span>miniaturas : {{this.thumbnails}}</span><br>
+                    </div>
+                    <div>
+                        <button type="button" id={{this.id}} class="removeProduct">Remover producto</button>
+                    </div>
                 </li><br>
                 {{/each}}
             </ul>
         </div>
-        <div>
+        <div id="ticketsContainer">
             <h3>Todos tus tickets de compra informacion:</h3>
             <ul>
                 {{#each auxTickets}}
-                <li>
-                    id : {{this.id}}<br>
-                    codigo de compra : {{this.code}}<br>
-                    Dia de la compra : {{this.purchase_datetime}}<br>
-                    Total : {{this.amount}}<br>
-                    Comprador : {{this.purchaser}}<br>
+                <li id="ticketLi">
+                    <div>
+                        <span>id : {{this.id}}</span>
+                    </div>
+                    <div>
+                        <span> codigo de compra : {{this.code}}</span>
+                    </div>
+                    <div>
+                        <span>Dia de la compra : {{this.purchase_datetime}}</span>
+                    </div>
+                    <div>
+                        <span>Total : {{this.amount}}</span>
+                    </div>
+                    <div>
+                        <span>Comprador : {{this.purchaser}}</span>
+                    </div>
                 </li><br>
                 {{/each}}
             </ul>

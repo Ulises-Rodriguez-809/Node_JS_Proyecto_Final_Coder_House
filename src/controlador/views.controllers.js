@@ -219,6 +219,24 @@ class ViewsControllers {
         }
     }
 
+    static currentUserProfile = async(req,res)=>{
+        try {
+            const tokenInfo = req.cookies["jwt-cookie"];
+
+            const decodedToken = jwt.decode(tokenInfo);
+
+            const { full_name, age, email, rol, cartID } = decodedToken;
+
+            const cartUrl = `/carts/${cartID}`;
+
+            res.render("profile",{cartUrl});
+        } catch (error) {
+            res.status(500).send({
+                status : "error",
+                payload : "No se logro renderizar el perfil del usuario"
+            })
+        }
+    }
 
     static usersInfo = async (req, res) => {
         try {

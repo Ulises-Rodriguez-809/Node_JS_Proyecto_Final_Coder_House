@@ -32,6 +32,9 @@ router.get('/realtimeproducts', checkRole(["premium", "admin"]), ViewsController
 // vista para obtener el premium
 router.get('/preimum', checkRole(["user"]), ViewsControllers.premium);
 
+// current user
+router.get('/profile',ViewsControllers.currentUserProfile);
+
 // vista para q el admin vea todos los usuarios y pueda eliminar los inactivos en los ultimos 2 dias
 router.get('/users', checkRole(["admin"]), ViewsControllers.usersInfo);
 

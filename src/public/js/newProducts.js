@@ -1,7 +1,7 @@
-const form = document.getElementById("nuevo-producto");
+const formNewProduct = document.getElementById("nuevo-producto");
 
-const inputIdEliminar = document.getElementById("input-id-eliminar");
-const btnEliminar = document.getElementById("btn-eliminar");
+const formDeleteProduct = document.getElementById("delete-product");
+
 
 const formUpdate = document.getElementById("actualizar-producto");
 
@@ -9,10 +9,20 @@ const owner = document.getElementById("input-owner-add");
 
 owner.readOnly = true;
 
-form.addEventListener("submit", e => {
-    e.preventDefault()
+formNewProduct.addEventListener("submit", e => {
+    e.preventDefault();
 
-    const data = new FormData(form);
+    const newProductContainer = document.querySelector(".new-producto");
+
+    const newProductInput = document.querySelector(".new-product-input");
+    newProductInput.style.visibility = "hidden";
+
+    const i = document.createElement("i");
+    i.className = "gg-spinner";
+
+    newProductContainer.appendChild(i);
+
+    const data = new FormData(formNewProduct);
 
     fetch(`/api/productsDB`, {
         method: "POST",
@@ -20,21 +30,37 @@ form.addEventListener("submit", e => {
     })
         .then(result => result.json())
         .then(json => {
-            console.log(json);
-
             if (json.status === "success") {
                 alert("Producto agregado");
+                newProductContainer.removeChild(i);
+                newProductInput.style.visibility = "visible";
             } else {
                 if (json.message === "El codigo del producto ya se encuentra en uso") {
                     alert("No se logro añadir el producto, motivo: code ya utilizado");
                 } else {
-                    alert("No se logro añadir el producto, motivos: campos incompletos o no validos")
+                    alert("No se logro añadir el producto, motivos: campos incompletos o no validos");
                 }
+                newProductContainer.removeChild(i);
+                newProductInput.style.visibility = "visible";
             }
         })
 });
 
-btnEliminar.addEventListener("click", () => {
+formDeleteProduct.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const inputIdEliminar = document.getElementById("input-id-eliminar");
+
+    const deleteProductContainer = document.querySelector(".delete-product");
+
+    const deleteProductInput = document.querySelector(".delete-product-input");
+    deleteProductInput.style.visibility = "hidden";
+
+    const i = document.createElement("i");
+    i.className = "gg-spinner";
+
+    deleteProductContainer.appendChild(i);
+
     const idProduct = inputIdEliminar.value;
 
     const endpoint = `/api/productsDB/${idProduct}`
@@ -50,23 +76,35 @@ btnEliminar.addEventListener("click", () => {
     })
         .then(result => result.json())
         .then(json => {
-            console.log(json)
-
             if (json.status === "error") {
                 if (json.payload === "premium") {
                     alert(`Error, un usuario premium solo puede eliminar productos creados por el`);
                 } else {
                     alert(`No se logro eliminar el producto con el id: ${idProduct}`);
                 }
+                deleteProductContainer.removeChild(i);
+                deleteProductInput.style.visibility = "visible";
             }
             else {
                 alert(`El producto el id: ${idProduct} se elimino con exito`);
+                deleteProductContainer.removeChild(i);
+                deleteProductInput.style.visibility = "visible";
             }
         })
 })
 
 formUpdate.addEventListener("submit", e => {
-    e.preventDefault()
+    e.preventDefault();
+
+    const updateProductContainer = document.querySelector(".update-product");
+
+    const updateProductInput = document.querySelector(".update-product-input");
+    updateProductInput.style.visibility = "hidden";
+
+    const i = document.createElement("i");
+    i.className = "gg-spinner";
+
+    updateProductContainer.appendChild(i);
 
     const data = new FormData(formUpdate);
 
@@ -80,21 +118,17 @@ formUpdate.addEventListener("submit", e => {
         method: "PUT",
         body: data,
     })
-        // fetch(endpoint, {
-        //     method: "PUT",
-        //     body: JSON.stringify(obj),
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // })
         .then(result => result.json())
         .then(json => {
-            console.log(json);
             if (json.status === "success") {
                 alert("Producto Actualizado");
+                updateProductContainer.removeChild(i);
+                updateProductInput.style.visibility = "visible";
             }
             else {
                 alert("No se logro actualizar el producto");
+                updateProductContainer.removeChild(i);
+                updateProductInput.style.visibility = "visible";
             }
         })
 });

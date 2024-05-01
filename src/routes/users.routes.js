@@ -6,7 +6,7 @@ import { checkRole } from '../middlewares/auth.js';
 const router = Router();
 
 // obtiene todos los usuarios sin info sensible
-router.get("/", UsersControllers.getAllUsers);
+router.get("/", checkRole(["admin"]),UsersControllers.getAllUsers);
 
 // obtiene un usuario
 router.get("/getUser/:userEmail", checkRole(["admin"]),UsersControllers.getUser);
