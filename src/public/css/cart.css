@@ -27,6 +27,7 @@ body{
 #stockContainer>ul, #notStockContainer>ul, #ticketsContainer>ul{
     width: 80%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgb(219, 218, 218);

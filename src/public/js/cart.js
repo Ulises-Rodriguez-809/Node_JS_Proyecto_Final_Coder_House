@@ -13,6 +13,17 @@ btnClearCart.addEventListener("click", (e) => {
     const id = getCartId();
     const endpoint = `/api/cartsDB/${id}`;
 
+    const clearCartContainer = document.getElementById("clearCartContainer");
+
+    const clearCartBtn = document.getElementById("clearCart");
+
+    clearCartBtn.style.visibility = "hidden";
+
+    const i = document.createElement("i");
+    i.className = "gg-spinner";
+
+    clearCartContainer.appendChild(i);
+
     fetch(endpoint, {
         method: "DELETE",
         body: JSON.stringify({}),
@@ -22,13 +33,16 @@ btnClearCart.addEventListener("click", (e) => {
     })
         .then(result => result.json())
         .then(json => {
-            console.log(json);
             if (json.status === "success") {
                 alert(json.message);
+                clearCartContainer.removeChild(i);
+                clearCartBtn.style.visibility = "visible";
                 location.reload();
             }
             else {
                 alert("No se logro vaciar el carrito de compra, contacte al servicio al cliente");
+                clearCartContainer.removeChild(i);
+                clearCartBtn.style.visibility = "visible";
             }
         })
 

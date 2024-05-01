@@ -1,16 +1,16 @@
 <header>
     <nav>
         <div>
-            <ul>
+            <ul class="ulLinkContainer">
                 <li><a href="/home">Home</a></li>
-                <li><a href="/realtimeproducts">Real Time Products</a></li>
-                <li><a href="/api/sessions/current">Informacion del usuario</a></li>
+                <li><a href="/realtimeproducts">New product</a></li>
+                <li><a href="/profile">Perfil</a></li>
             </ul>
         </div>
     </nav>
 </header>
 <main>
-    <div>
+    <div class="divUsers">
         <div>
             <form id="formGet">
                 <div>
@@ -25,7 +25,7 @@
         <div id="divGetUser">
         </div>
     </div>
-    <div>
+    <div class="divUsers">
         <form id="formUpdateRol">
             <div>
                 <label for="input-update-rol-id">Id usuario</label>
@@ -40,7 +40,7 @@
             </div>
         </form>
     </div>
-    <div>
+    <div class="divUsers">
         <form id="formDeleteOneUser">
             <div>
                 <label for="input-delete-user">Id usuario</label>
@@ -51,13 +51,13 @@
             </div>
         </form>
     </div>
-    <div>
+    <div class="divUsers">
         <form id="formDeleteInactive">
             <input type="submit" value="Eliminar usuarios inactivos">
         </form>
     </div>
     {{#each users}}
-        <div>
+        <div class="divUsers">
             <ul>
                 <li>Nombre : {{this.name}}</li>
                 <li>Email : {{this.email}}</li>
@@ -67,3 +67,4 @@
     {{/each}}
 </main>
 <script src="/js/users.js"></script>
+<link rel="stylesheet" href="/css/users.css">

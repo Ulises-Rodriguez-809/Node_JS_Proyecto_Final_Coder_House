@@ -200,6 +200,8 @@ class SessionControler {
                 })
             }
 
+            const userUpdated = await this.updateLastLogin(req, res);
+
             const user = {
                 full_name: `${first_name} ${last_name}`,
                 age,
