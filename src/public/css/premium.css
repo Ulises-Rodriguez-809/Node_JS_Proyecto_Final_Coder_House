@@ -1,6 +1,6 @@
 @import url("nav.css");
 
-#usersContiainer{
+#formPremiumContainer{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -8,7 +8,7 @@
     background-color: rgb(219, 218, 218);
 }
 
-.divUsers{
+#form-premium{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,15 +20,7 @@
     font-size: 1.5rem;
 }
 
-.formUsers{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    width: 100%;
-}
-
-.formUsers>div{
+#form-premium>div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,32 +29,14 @@
     width: 100%;
 }
 
-.formUsers>div>label, .formUsers>div>input{
+#form-premium>div>input{
+    width: 80%;
     font-size: 1.3rem;
-    width: 80%;
-}
-
-.formUsers>div>input{
     text-align: center;
 }
 
-.users{
-    background-color: rgb(120, 192, 252);
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.users>ul{
-    background-color: rgb(219, 218, 218);
-    list-style: none;
-    width: 75%;
-}
-
-.users>ul>li{
-    font-size: 1.2rem;
-    margin: 5px;
+#form-premium>div>#premiumInput{
+    width: 130px;
     text-align: center;
+    border-radius: 500px;
 }

@@ -10,61 +10,64 @@
     </nav>
 </header>
 <main>
-    <div class="divUsers">
-        <div>
-            <form id="formGet">
+    <div id="usersContiainer">
+        <div class="divUsers">
+                <form id="formGet" class="formUsers">
+                    <div>
+                        <label for="input-get-user">Email usuario</label>
+                        <input type="text" placeholder="ingresar id usuario" name="email" id="input-get-user">
+                    </div>
+                    <div>
+                        <input type="submit" value="Obtener un usuarios" class="usersInputBtn">
+                    </div>
+                </form>
+            <div id="divGetUser">
+            </div>
+        </div>
+        <div class="divUsers">
+            <form id="formUpdateRol" class="formUsers">
                 <div>
-                    <label for="input-get-user">Email usuario</label>
-                    <input type="text" placeholder="ingresar id usuario" name="email" id="input-get-user">
+                    <label for="input-update-rol-id">Id usuario</label>
+                    <input type="text" placeholder="ingresar id usuario" name="id" id="input-update-rol-id">
                 </div>
                 <div>
-                    <input type="submit" value="Obtener un usuarios">
+                    <label for="input-update-rol">rol usuario</label>
+                    <input type="text" placeholder="ingresar el nuevo rol del usuario" name="rol" id="input-update-rol">
+                </div>
+                <div>
+                    <input type="submit" value="Modificar el rol de un usuario" class="usersInputBtn">
                 </div>
             </form>
         </div>
-        <div id="divGetUser">
-        </div>
-    </div>
-    <div class="divUsers">
-        <form id="formUpdateRol">
-            <div>
-                <label for="input-update-rol-id">Id usuario</label>
-                <input type="text" placeholder="ingresar id usuario" name="id" id="input-update-rol-id">
-            </div>
-            <div>
-                <label for="input-update-rol">rol usuario</label>
-                <input type="text" placeholder="ingresar el nuevo rol del usuario" name="rol" id="input-update-rol">
-            </div>
-            <div>
-                <input type="submit" value="Modificar el rol de un usuario">
-            </div>
-        </form>
-    </div>
-    <div class="divUsers">
-        <form id="formDeleteOneUser">
-            <div>
-                <label for="input-delete-user">Id usuario</label>
-                <input type="text" placeholder="ingresar id usuario" name="inputDeleteUser" id="input-delete-user">
-            </div>
-            <div>
-                <input type="submit" value="Eliminar un usuario">
-            </div>
-        </form>
-    </div>
-    <div class="divUsers">
-        <form id="formDeleteInactive">
-            <input type="submit" value="Eliminar usuarios inactivos">
-        </form>
-    </div>
-    {{#each users}}
         <div class="divUsers">
-            <ul>
-                <li>Nombre : {{this.name}}</li>
-                <li>Email : {{this.email}}</li>
-                <li>Rol : {{this.rol}}</li>
-            </ul>
+            <form id="formDeleteOneUser" class="formUsers">
+                <div>
+                    <label for="input-delete-user">Id usuario</label>
+                    <input type="text" placeholder="ingresar id usuario" name="inputDeleteUser" id="input-delete-user">
+                </div>
+                <div>
+                    <input type="submit" value="Eliminar un usuario" class="usersInputBtn">
+                </div>
+            </form>
         </div>
-    {{/each}}
+        <div class="divUsers">
+            <form id="formDeleteInactive" class="formUsers">
+                <div>
+                    <label>Eliminar usuarios inactivos</label>
+                    <input type="submit" value="Eliminar usuarios inactivos" class="usersInputBtn">
+                </div>
+            </form>
+        </div>
+        {{#each users}}
+            <div class="users">
+                <ul>
+                    <li>Nombre : {{this.name}}</li>
+                    <li>Email : {{this.email}}</li>
+                    <li>Rol : {{this.rol}}</li>
+                </ul>
+            </div>
+        {{/each}}
+    </div>
 </main>
 <script src="/js/users.js"></script>
 <link rel="stylesheet" href="/css/users.css">

@@ -234,8 +234,8 @@ class UsersControllers {
                 const logoutMonth = logoutDateArray["2"].split(":")[1];
                 const logoutYear = logoutDateArray["3"].split(":")[1];
 
-                // compruebo el año
-                if (currentYear > logoutYear || currentMonth > logoutMonth || currentDay > logoutDay) {
+                // logoutDate === "" tomo el q nunca haya entrado como condicion ya q si te registras pero nunca entras a la hora de borrar los usuarios inactivos tira error
+                if (logoutDate === "" || currentYear > logoutYear || currentMonth > logoutMonth || currentDay > logoutDay) {
                     const result = await userService.delete(user.id);
 
                     //si se borro el usuario envio mail

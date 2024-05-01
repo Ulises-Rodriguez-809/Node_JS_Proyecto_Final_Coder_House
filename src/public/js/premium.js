@@ -9,6 +9,16 @@ form.addEventListener("submit", async (e) => {
 
     let aux = "";
 
+    const premiumContainerInput = document.getElementById("premiumContainerInput");
+
+    const premiumInput = document.getElementById("premiumInput");
+    premiumInput.style.visibility = "hidden";
+
+    const i = document.createElement("i");
+    i.className = "gg-spinner";
+
+    premiumContainerInput.appendChild(i);
+
     const request = await fetch(endpointDocuments, {
         method: "POST",
         body: data,
@@ -43,15 +53,15 @@ form.addEventListener("submit", async (e) => {
 
         let url = location.href;
 
+        premiumContainerInput.removeChild(i);
+        premiumInput.style.visibility = "visible";
+
         if (url.includes("onrender")) {
             location.replace("https://node-proyecto-final.onrender.com/");
         }
         else if (url.includes("railway")) {
             location.replace("https://nodeproyectofinal-production.up.railway.app/");
         }
-        // else if (url.includes("vercel")) { //esto a futuro para cuando suba el proyecto a vercel tambien
-        //     location.replace("url de vercel");
-        // }
         else{
             location.replace("http://localhost:8080/");
         }
