@@ -228,19 +228,32 @@ class UsersControllers {
                 // obtengo la ultima ves q el usuario se deslogueo
                 const logoutDate = user.last_connection.logout;
 
-                // obtengo los numeros de dia,mes,año
-                const logoutDateArray = logoutDate.split("-");
-                const logoutDay = logoutDateArray["1"].split(":")[1];
-                const logoutMonth = logoutDateArray["2"].split(":")[1];
-                const logoutYear = logoutDateArray["3"].split(":")[1];
+                console.log(logoutDate);
+                console.log(logoutDate === "");
 
-                // logoutDate === "" tomo el q nunca haya entrado como condicion ya q si te registras pero nunca entras a la hora de borrar los usuarios inactivos tira error
-                if (logoutDate === "" || currentYear > logoutYear || currentMonth > logoutMonth || currentDay > logoutDay) {
+                if (logoutDate === "") {
                     const result = await userService.delete(user.id);
 
                     //si se borro el usuario envio mail
                     if (result) {
                         const email = emailSender(user.email, template, subject);
+                    }
+                }
+                else{
+                    // obtengo los numeros de dia,mes,año
+                    const logoutDateArray = logoutDate.split("-");
+                    const logoutDay = logoutDateArray["1"].split(":")[1];
+                    const logoutMonth = logoutDateArray["2"].split(":")[1];
+                    const logoutYear = logoutDateArray["3"].split(":")[1];
+    
+                    // logoutDate === "" tomo el q nunca haya entrado como condicion ya q si te registras pero nunca entras a la hora de borrar los usuarios inactivos tira error
+                    if (currentYear > logoutYear || currentMonth > logoutMonth || currentDay > logoutDay) {
+                        const result = await userService.delete(user.id);
+    
+                        //si se borro el usuario envio mail
+                        if (result) {
+                            const email = emailSender(user.email, template, subject);
+                        }
                     }
                 }
             }
