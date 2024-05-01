@@ -2,7 +2,7 @@ import passport from 'passport';
 import local from 'passport-local';
 import GitHubStrategy from 'passport-github2';
 import jwt from 'passport-jwt';
-import { options } from './config.js';
+// import { options } from './config.js';
 
 
 import { createHash, isValidPassword } from '../utils.js';
@@ -75,7 +75,7 @@ const inicializePassport = () => {
             try {
                 let user = {};
 
-                if (username === options.ADMIN_EMAIL && password === options.ADMIN_PASSWORD) {
+                if (username === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
 
                     user = {
                         first_name: "Coder",
@@ -124,9 +124,6 @@ const inicializePassport = () => {
     // recorda cambiar esto entre dev y render/railway
     passport.use("github", new GitHubStrategy(
         {
-            // clientID: options.CLIENT_ID,
-            // clientSecret: options.CLIENT_SECRET,
-            // callbackURL: options.CALLBACK_URL,
             clientID: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
             callbackURL: process.env.CALLBACK_URL,

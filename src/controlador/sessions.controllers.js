@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { options } from '../config/config.js';
+// import { options } from '../config/config.js';
 import { userService } from '../respository/index.repository.js';
 import { createHash, emailSender, generateEmailToken, isValidPassword } from '../utils.js';
 import { sendRecoverPassword } from '../config/gmail.js';
@@ -113,7 +113,7 @@ class SessionControler {
 
             const { first_name, last_name, age, email, password, cart, rol } = req.user;
 
-            if (email === options.ADMIN_EMAIL && password === options.ADMIN_PASSWORD) {
+            if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
                 user = {
                     full_name: `${first_name} ${last_name}`,
                     age,
@@ -149,11 +149,11 @@ class SessionControler {
 
             }
 
-            const token = jwt.sign(user, options.JWT_SECRET_WORD, { expiresIn: "2h" });
+            const token = jwt.sign(user, process.env.JWT_SECRET_WORD, { expiresIn: "2h" });
 
             // enviamos el token por la cookie
             // HttpOnly Cookies evitan que los scripts del lado del cliente accedan a estas cookies, reduciendo significativamente el riesgo de ataques XSS
-            res.cookie(options.COOKIE_WORD, token, { httpOnly: true, maxAge: 3600000 }).json({
+            res.cookie(process.env.COOKIE_WORD, token, { httpOnly: true, maxAge: 3600000 }).json({
                 status: "success",
                 payload: token
             })
@@ -208,9 +208,9 @@ class SessionControler {
                 cartID: cart._id
             }
 
-            const token = jwt.sign(user, options.JWT_SECRET_WORD, { expiresIn: "2h" });
+            const token = jwt.sign(user, process.env.JWT_SECRET_WORD, { expiresIn: "2h" });
 
-            res.cookie(options.COOKIE_WORD, token, { httpOnly: true, maxAge: 3600000 })
+            res.cookie(process.env.COOKIE_WORD, token, { httpOnly: true, maxAge: 3600000 })
 
             res.redirect("/home");
 
@@ -312,14 +312,14 @@ class SessionControler {
 
             const { email } = decodedToken;
 
-            if (email !== options.ADMIN_EMAIL) {
+            if (email !== process.env.ADMIN_EMAIL) {
                 // al igual q el update de last_login no te hace falta guardar el resultado del update pero como en el repository de user retornas algo, es para mantener la misma estrucura
                 const userUpdated = await this.updateLastLogout(req, res);
             }
 
-            if (req.cookies[options.COOKIE_WORD]) {
+            if (req.cookies[process.env.COOKIE_WORD]) {
 
-                res.clearCookie(options.COOKIE_WORD);
+                res.clearCookie(process.env.COOKIE_WORD);
 
                 req.logger.info("Cookie limpiada con exito");
 

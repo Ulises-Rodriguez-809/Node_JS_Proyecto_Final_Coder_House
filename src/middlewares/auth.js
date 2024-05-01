@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-// import {options} from '../config/config.js';
 
 export const checkRole = (roles)=>{
     return (req,res,next)=>{
@@ -59,56 +58,10 @@ export const verifyEmailTokenMW = (req,res,next)=>{
             // ahora los comparo
             if (currentDate > expDate) {
                 res.render("recoverPassword",{message : "Token expirado"});
-
-                // return res.json({
-                //     status : "error",
-                //     message : "El token a expirado"
-                // })
             }
 
             // si todo esta bien se ejecuta el next
 
         next();
     }
-    // return (req,res,next)=>{
-    //     try {
-    //         // tomamos el token q recivimos de la request
-    //         // lo tomamos del query xq lo vamos a mandar por la url en el link del emial
-    //         const tokenInfo = req.query.token;
-
-    //         // decodifico el token
-    //         const decodedToken = jwt.decode(tokenInfo);
-
-    //         console.log(decodedToken);
-
-    //         // obtenemos el tiempo de expiracion del token
-    //         const expireTime = decodedToken.exp * 1000;
-    //         console.log(decodedToken.exp);
-    //         console.log(expireTime);
-
-    //         // lo formateamos usando el objeto Date
-    //         const expDate = new Date(expireTime);
-
-    //         // luego tomo la fecha actual
-    //         const currentDate = new Date();
-
-    //         // ahora los comparo
-    //         if (currentDate > expDate) {
-    //             return res.json({
-    //                 status : "error",
-    //                 message : "El token a expirado"
-    //             })
-    //         }
-
-    //         // si todo esta bien se ejecuta el next
-
-    //     } catch (error) {
-    //         return res.json({
-    //             status : "error",
-    //             message : "error en el token"
-    //         })
-    //     }
-
-    //     next();
-    // }
 }

@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer";
-import { options } from "./config.js";
+// import { options } from "./config.js";
 import { emailSender } from "../utils.js";
 
 //credenciales
 // const adminEmail = options.EMAIL_TOKEN || "uliisesrodriguez809@gmail.com";
 // const adminPass = options.EMAIL_PASSWORD || "msqccuubswmmxdzm";
-const adminEmail = options.EMAIL_TOKEN;
-const adminPass = options.EMAIL_PASSWORD;
+const adminEmail = process.env.EMAIL_TOKEN;
+const adminPass = process.env.EMAIL_PASSWORD;
 
 //configurar el canal de comunicacion entre node y gmail
 const transporter = nodemailer.createTransport({

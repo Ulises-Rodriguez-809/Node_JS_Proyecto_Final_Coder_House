@@ -15,7 +15,7 @@
     {{!-- recorda cambiar todos los options.ALGO pro process.env.ALGO (igual andan asi q a lo mejor no hace falta) --}}
     {{!-- limpia el codigo fijate si podes reutilizar codigo y esas cosas podes mandar el codigo reutilizado a utils
     como funcioness
-    agrega css a esta vista--}}
+    agrega css a esta vistas--}}
     <h1>Lista de productos comprados, productos sin stock e informacion de tickets de compra</h1>
     <div id="cartContainer">
         <div>
@@ -103,7 +103,7 @@
         </div>
         <div id="ticketsContainer">
             <h3>Todos tus tickets de compra informacion:</h3>
-            <ul>
+            <ul id="ulTickets">
                 {{#each auxTickets}}
                 <li id="ticketLi">
                     <div>
@@ -121,9 +121,11 @@
                     <div>
                         <span>Comprador : {{this.purchaser}}</span>
                     </div>
-                </li><br>
+                </li>
                 {{/each}}
             </ul>
+            <button id="prev">prev</button>
+            <button id="next">next</button>
         </div>
     </div>
 </main>

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { transporter } from './config/gmail.js';
 import { Faker, en } from '@faker-js/faker';
 import jwt from 'jsonwebtoken';
-import { options } from './config/config.js';
+// import { options } from './config/config.js';
 import multer from 'multer';
 import { productService } from './respository/index.repository.js';
 import { ProductManagerDB } from './dao/managersDB/productManagerDB.js';
@@ -95,7 +95,7 @@ export const createTicketsArray = (array)=>{
             purchaser,
         }
 
-        result.push(aux);
+        result.unshift(aux);
     }
 
     return result;
@@ -166,14 +166,14 @@ export const emailSender = async (email, template, subject = "Atencion al client
 
 export const generateEmailToken = (email, expireTime) => {
     //pasale 1 minuto para hacer q el token expire rapido y probarlo, despues cambialo a 1 hora 3600 
-    const token = jwt.sign({ email }, options.EMAIL_TOKEN, { expiresIn: expireTime });
+    const token = jwt.sign({ email }, process.env.EMAIL_TOKEN, { expiresIn: expireTime });
 
     return token;
 }
 
 export const verifyEmailToken = (token) => {
     try {
-        const info = jwt.verify(token, options.EMAIL_TOKEN);
+        const info = jwt.verify(token, process.env.EMAIL_TOKEN);
 
         return info.email;
 

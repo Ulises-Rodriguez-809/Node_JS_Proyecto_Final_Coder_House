@@ -1,12 +1,9 @@
 import winston from 'winston';
-import {options} from '../config/config.js'
+// import {options} from '../config/config.js'
 import path from 'path'
 import __dirname from '../utils.js';
 
-const currentEnviroment = options.NODE_ENV || "development";
-
-// Crear un endpoint /loggerTest que permita probar todos los logs --> supongo q es un enpoint donde pones req.logger.info("error info"), req.logger.debug("error debug"), req.logger.fatal("error fatal"), etc y los mostras en un res.send o algo asi
-// preguntalo por las dudas
+const currentEnviroment = process.env.NODE_ENV || "development";
 
 const customLevels = {
     levels : {

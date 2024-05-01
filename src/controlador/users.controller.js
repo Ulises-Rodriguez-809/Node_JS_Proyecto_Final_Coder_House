@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { userService } from '../respository/index.repository.js';
-import { options } from '../config/config.js'
+// import { options } from '../config/config.js'
 import { emailSender } from '../utils.js';
 
 class UsersControllers {
@@ -78,7 +78,7 @@ class UsersControllers {
             // const updateUser = await userService.update(user.id, user);
             const updateUser = await userService.update(userId, user);
 
-            res.clearCookie(options.COOKIE_WORD);
+            res.clearCookie(process.env.COOKIE_WORD);
 
             res.send({
                 status: "success",
